@@ -2,7 +2,7 @@
 
 Files are named by BibTeX key. Every PDF was checked against its first-page text to be the cited work. Sources: arXiv, publisher and repository open-access copies, standards-body pages, and PDFs supplied by the author.
 
-56 cited works: 54 PDFs (6 printed from web pages with headless Chrome; the BPMN entry is the official OMG specification PDF; 8 are arXiv versions of the cited venue papers), 2 still missing. Summaries of every file follow the table.
+54 cited works, all 54 on file (6 printed from web pages with headless Chrome; the BPMN entry is the official OMG specification PDF; 8 are arXiv versions of the cited venue papers). Summaries of every file follow the table.
 
 | key | title | file | status | identifier |
 |---|---|---|---|---|
@@ -37,14 +37,12 @@ Files are named by BibTeX key. Every PDF was checked against its first-page text
 | `malcolm1959pert` | Application of a technique for research and development program evaluation | malcolm1959pert.pdf | PDF | https://doi.org/10.1287/opre.7.5.646 |
 | `matsushima2015cooking` | A cooking-step scheduling algorithm with guidance system for homemade cooking | matsushima2015cooking.pdf | PDF | https://doi.org/10.1587/transinf.2015EDP7048 |
 | `mcpspec2025` | Model Context Protocol | mcpspec2025.pdf | PDF (printed web page) | https://modelcontextprotocol.io/specification/2025-06-18 |
-| `melissargos1997rescheduling` | Employing interactivity and visualization to augment the process of machine-based rescheduling | — | missing |  |
 | `morris2001dc` | Dynamic control of plans with temporal uncertainty | morris2001dc.pdf | PDF |  |
 | `nakabe2021cooking` | Optimal cooking procedure presentation system for multiple recipes and investigating its effect | nakabe2021cooking.pdf | PDF | https://doi.org/10.3390/a14020067 |
 | `norbis1996interactive` | An interactive decision support system for the resource constrained scheduling problem | norbis1996interactive.pdf | PDF | https://doi.org/10.1016/0377-2217(95)00187-5 |
 | `omg2011bpmn` | Business Process Model and Notation | omg2011bpmn.pdf | PDF (official specification) | https://www.omg.org/spec/BPMN/2.0/ |
 | `opentronsapi` | Opentrons | opentronsapi.pdf | PDF (printed web page) | https://docs.opentrons.com/python-api/ |
 | `parmar2026mcpworkflow` | Separating intelligence from execution: A workflow engine for the Model Context Protocol | parmar2026mcpworkflow.pdf | PDF | https://doi.org/10.48550/arXiv.2605.00827 |
-| `pinedo2022scheduling` | Scheduling: Theory, Algorithms, and Systems | — | missing | https://doi.org/10.1007/978-3-031-05921-6 |
 | `rahmanian2022helao` | Enabling modular autonomous feedback-loops in materials science through hierarchical experimental laboratory automation and orchestration | rahmanian2022helao.pdf | PDF | https://doi.org/10.1002/admi.202101987 |
 | `sener2022assembly101` | Assembly101: A large-scale multi-view video dataset for understanding procedural activities | sener2022assembly101.pdf | PDF (arXiv) | https://doi.org/10.1109/CVPR52688.2022.02042 |
 | `shi2024protocol` | Expert-level protocol translation for self-driving labs | shi2024protocol.pdf | PDF | https://doi.org/10.48550/arXiv.2411.00444 |
