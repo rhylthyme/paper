@@ -1,4 +1,5 @@
-refs/
+refs/*
+!refs/README.md
 *.aux
 *.bbl
 *.blg
