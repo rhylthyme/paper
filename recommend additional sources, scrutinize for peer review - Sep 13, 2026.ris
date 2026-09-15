@@ -1,0 +1,708 @@
+TY  - JOUR
+AU  - Hartmann, S.
+AU  - Briskorn, Dirk
+TI  - An updated survey of variants and extensions of the resource-constrained project scheduling problem
+PY  - 2022
+DA  - 2022-02-01
+JO  - Eur. J. Oper. Res.
+VL  - 297
+SP  - 1
+EP  - 14
+DO  - 10.1016/j.ejor.2021.05.004
+UR  - https://consensus.app/papers/an-updated-survey-of-variants-and-extensions-of-the-hartmann-briskorn/6f0e24a636a5560bad57cb793f0760b8/
+ER  - 
+TY  - JOUR
+AU  - Herroelen, W.
+AU  - Demeulemeester, E.
+TI  - Resource-constrained project scheduling: A survey of recent developments
+PY  - 1998
+DA  - 1998-04-01
+JO  - Comput. Oper. Res.
+VL  - 25
+SP  - 279
+EP  - 302
+DO  - 10.1016/s0305-0548(97)00055-5
+UR  - https://consensus.app/papers/resourceconstrained-project-scheduling-a-survey-of-herroelen-demeulemeester/f77789866d2e513ebfaf55e7bec36ff5/
+ER  - 
+TY  - JOUR
+AU  - Bettini, C.
+AU  - Wang, Xiaoyang
+AU  - Jajodia, S.
+TI  - Temporal Reasoning in Workflow Systems
+PY  - 2002
+DA  - 2002-05-01
+JO  - Distributed and Parallel Databases
+VL  - 11
+SP  - 269
+EP  - 306
+DO  - 10.1023/a:1014048800604
+UR  - https://consensus.app/papers/temporal-reasoning-in-workflow-systems-bettini-wang/187dfcee845951338b9a4742fc0cf1b5/
+ER  - 
+TY  - JOUR
+AU  - Fan, Shiqing
+AU  - Ding, Xichen
+AU  - Zhang, Liang
+AU  - Mo, Linjian
+TI  - MCPToolBench++: A Large Scale AI Agent Model Context Protocol MCP Tool Use Benchmark
+PY  - 2025
+DA  - 2025-08-11
+JO  - ArXiv
+VL  - abs/2508.07575
+SP  - 
+EP  - 
+DO  - 10.48550/arxiv.2508.07575
+UR  - https://consensus.app/papers/mcptoolbench-a-large-scale-ai-agent-model-context-protocol-fan-ding/defe1377b3a859989c62be95daf1c296/
+ER  - 
+TY  - JOUR
+AU  - Wang, Zhenting
+AU  - Chang, Qi
+AU  - Patel, Hemani
+AU  - Biju, S.
+AU  - Wu, Chen
+AU  - Liu, Quan
+AU  - Ding, Aolin
+AU  - Rezazadeh, Alireza
+AU  - Shah, Ankit
+AU  - Bao, Yujia
+AU  - Siow, Eugene
+TI  - MCP-Bench: Benchmarking Tool-Using LLM Agents with Complex Real-World Tasks via MCP Servers
+PY  - 2025
+DA  - 2025-08-28
+JO  - ArXiv
+VL  - abs/2508.20453
+SP  - 
+EP  - 
+DO  - 10.48550/arxiv.2508.20453
+UR  - https://consensus.app/papers/mcpbench-benchmarking-toolusing-llm-agents-with-complex-wang-chang/39388db76e8d50ce8a5d77e35d7be327/
+ER  - 
+TY  - JOUR
+AU  - Hartmann, S.
+AU  - Briskorn, Dirk
+TI  - A survey of variants and extensions of the resource-constrained project scheduling problem
+PY  - 2010
+DA  - 2010-11-16
+JO  - Eur. J. Oper. Res.
+VL  - 207
+SP  - 1
+EP  - 14
+DO  - 10.1016/j.ejor.2009.11.005
+UR  - https://consensus.app/papers/a-survey-of-variants-and-extensions-of-the-hartmann-briskorn/db449e05832851bebfc72a966d5f0a95/
+ER  - 
+TY  - JOUR
+AU  - Ding, Hongyan
+AU  - Zhuang, Cunbo
+AU  - Liu, Jian
+TI  - Extensions of the resource-constrained project scheduling problem
+PY  - 2023
+DA  - 2023-09-01
+JO  - Automation in Construction
+VL  - 
+SP  - 
+EP  - 
+DO  - 10.1016/j.autcon.2023.104958
+UR  - https://consensus.app/papers/extensions-of-the-resourceconstrained-project-ding-zhuang/cf36cd24ddc15f5dac1e3735811eb188/
+ER  - 
+TY  - JOUR
+AU  - Eder, Johann
+AU  - Panagos, E.
+AU  - Rabinovich, M.
+TI  - Workflow Time Management Revisited
+PY  - 2013
+DA  - 2013-01-01
+VL  - 
+SP  - 207
+EP  - 213
+DO  - 10.1007/978-3-642-36926-1_16
+UR  - https://consensus.app/papers/workflow-time-management-revisited-eder-panagos/59e496d3b8c151b39ad5969dd4330254/
+ER  - 
+TY  - JOUR
+AU  - Eder, Johann
+AU  - Franceschetti, M.
+AU  - Lubas, Josef
+TI  - Conditional Schedules for Processes with Temporal Constraints
+PY  - 2020
+DA  - 2020-07-01
+JO  - SN Computer Science
+VL  - 1
+SP  - 
+EP  - 
+DO  - 10.1007/s42979-020-00242-8
+UR  - https://consensus.app/papers/conditional-schedules-for-processes-with-temporal-eder-franceschetti/f21c668fb0d45d55b5ebd58290469433/
+ER  - 
+TY  - JOUR
+AU  - Lumer, Elias
+AU  - Gulati, Anmol
+AU  - Subbiah, V.
+AU  - Basavaraju, Pradeep Honaganahalli
+AU  - Burke, James
+TI  - ScaleMCP: Dynamic and Auto-Synchronizing Model Context Protocol Tools for LLM Agents
+PY  - 2025
+DA  - 2025-05-09
+JO  - ArXiv
+VL  - abs/2505.06416
+SP  - 
+EP  - 
+DO  - 10.48550/arxiv.2505.06416
+UR  - https://consensus.app/papers/scalemcp-dynamic-and-autosynchronizing-model-context-lumer-gulati/bd330b7203635c4eaff87ce733306330/
+ER  - 
+TY  - CONF
+AU  - Nargund, Nisharg
+AU  - Swain, Anil Kumar
+AU  - Behera, Naliniprava
+TI  - Model Context Protocol (MCP): A Lightweight, Modular Framework for Tool-Augmented LLM Agents
+PY  - 2025
+DA  - 2025-12-17
+JO  - 2025 13th International Conference on Intelligent Systems and Embedded Design (ISED)
+VL  - 
+SP  - 175
+EP  - 180
+DO  - 10.1109/ised67359.2025.11405153
+UR  - https://consensus.app/papers/model-context-protocol-mcp-a-lightweight-modular-nargund-swain/0d42736b4d1359faaacfd7ce6c4afc6d/
+ER  - 
+TY  - JOUR
+AU  - Senkul, Pinar
+AU  - Toroslu, I.
+TI  - An architecture for workflow scheduling under resource allocation constraints
+PY  - 2005
+DA  - 2005-07-01
+JO  - Inf. Syst.
+VL  - 30
+SP  - 399
+EP  - 422
+DO  - 10.1016/j.is.2004.03.003
+UR  - https://consensus.app/papers/an-architecture-for-workflow-scheduling-under-resource-senkul-toroslu/29e5f98173925386982819826148b900/
+ER  - 
+TY  - JOUR
+AU  - Barba, I.
+AU  - Ramírez, A.
+AU  - Reichert, M.
+AU  - Valle, C.
+AU  - Weber, B.
+TI  - Flexible runtime support of business processes under rolling planning horizons
+PY  - 2021
+DA  - 2021-03-16
+JO  - Expert Syst. Appl.
+VL  - 177
+SP  - 114857
+EP  - 
+DO  - 10.1016/j.eswa.2021.114857
+UR  - https://consensus.app/papers/flexible-runtime-support-of-business-processes-under-barba-ram%C3%ADrez/3a2d373605e65b258fd775b552c02fad/
+ER  - 
+TY  - JOUR
+AU  - Carlo, Combi
+AU  - Posenato, Roberto
+AU  - Viganò, Luca
+AU  - Zavatteri, Matteo
+TI  - Conditional Simple Temporal Networks with Uncertainty and Resources
+PY  - 2019
+DA  - 2019-04-24
+JO  - J. Artif. Intell. Res.
+VL  - 64
+SP  - 931
+EP  - 985
+DO  - 10.1613/jair.1.11453
+UR  - https://consensus.app/papers/conditional-simple-temporal-networks-with-uncertainty-carlo-posenato/5f2dc172f7da50c9b3341664bd614aec/
+ER  - 
+TY  - JOUR
+AU  - Arai, Yuya
+AU  - Takahashi, Ko
+AU  - Horinouchi, Takaaki
+AU  - Takahashi, Koichi
+AU  - Ozaki, Haruka
+TI  - SAGAS: Simulated annealing and greedy algorithm scheduler for laboratory automation.
+PY  - 2023
+DA  - 2023-03-01
+JO  - SLAS technology
+VL  - 
+SP  - 
+EP  - 
+DO  - 10.1016/j.slast.2023.03.001
+UR  - https://consensus.app/papers/sagas-simulated-annealing-and-greedy-algorithm-scheduler-arai-takahashi/1df8744592d15887817823f499401857/
+ER  - 
+TY  - JOUR
+AU  - Danzinger, Philipp
+AU  - Geibinger, Tobias
+AU  - Janneau, David
+AU  - Mischek, Florian
+AU  - Musliu, Nysret
+AU  - Poschalko, C.
+TI  - A System for Automated Industrial Test Laboratory Scheduling
+PY  - 2022
+DA  - 2022-08-01
+JO  - ACM Transactions on Intelligent Systems and Technology
+VL  - 14
+SP  - 1
+EP  - 27
+DO  - 10.1145/3546871
+UR  - https://consensus.app/papers/a-system-for-automated-industrial-test-laboratory-danzinger-geibinger/55863fdaf5375aa2aa75f0e2966fe414/
+ER  - 
+TY  - JOUR
+AU  - Yi, June-Sup
+AU  - Luong, T.
+AU  - Chae, Hosik
+AU  - Ahn, M.
+AU  - Noh, Donghun
+AU  - Tran, Huy Nguyen
+AU  - Doh, Myeongyun
+AU  - Auh, Eugene
+AU  - Pico, Nabih
+AU  - Yumbla, Francisco
+AU  - Hong, Dennis
+AU  - Moon, H.
+TI  - An Online Task-Planning Framework Using Mixed Integer Programming for Multiple Cooking Tasks Using a Dual-Arm Robot
+PY  - 2022
+DA  - 2022-04-15
+JO  - Applied Sciences
+VL  - 
+SP  - 
+EP  - 
+DO  - 10.3390/app12084018
+UR  - https://consensus.app/papers/an-online-taskplanning-framework-using-mixed-integer-yi-luong/fd6a18d277ef5ab987bec3ab3173b958/
+ER  - 
+TY  - JOUR
+AU  - Casas, Alexis
+AU  - Bultelle, Matthieu
+AU  - Kitney, R.
+TI  - An engineering biology approach to automated workflow and biodesign
+PY  - 2024
+DA  - 2024-06-15
+JO  - Synthetic Biology
+VL  - 9
+SP  - 
+EP  - 
+DO  - 10.1093/synbio/ysae009
+UR  - https://consensus.app/papers/an-engineering-biology-approach-to-automated-workflow-and-casas-bultelle/5f4abb8318a55685b33a4482653bf183/
+ER  - 
+TY  - JOUR
+AU  - Ghasemi, Mohammad
+AU  - Nazari, A.
+AU  - Thiruvady, Dhananjay
+TI  - Review of recent advances on the resource-constrained project scheduling problem
+PY  - 2026
+DA  - 2026-06-10
+JO  - International Journal of Production Research
+VL  - 
+SP  - 
+EP  - 
+DO  - 10.1080/00207543.2026.2683116
+UR  - https://consensus.app/papers/review-of-recent-advances-on-the-resourceconstrained-ghasemi-nazari/78332594399c5a7c9d8ded069c38d781/
+ER  - 
+TY  - JOUR
+AU  - Lu, Ruopeng
+AU  - Sadiq, S.
+AU  - Padmanabhan, V.
+AU  - Governatori, Guido
+TI  - Using a temporal constraint network for business process execution
+PY  - 2006
+DA  - 
+VL  - 
+SP  - 157
+EP  - 166
+UR  - https://consensus.app/papers/using-a-temporal-constraint-network-for-business-process-lu-sadiq/067bee0eb72b5ccfad7aed4bb81c096d/
+ER  - 
+TY  - JOUR
+AU  - Di Ciccio, Claudio
+AU  - Montali, Marco
+TI  - Declarative Process Specifications: Reasoning, Discovery, Monitoring
+PY  - 2022
+DA  - 2022-01-01
+VL  - 
+SP  - 108
+EP  - 152
+DO  - 10.1007/978-3-031-08848-3_4
+UR  - https://consensus.app/papers/declarative-process-specifications-reasoning-discovery-ciccio-montali/0b869156f23b5431ac1a80a419c53c47/
+ER  - 
+TY  - BOOK
+AU  - Lee, Ga-Hui
+TI  - SASIL: a domain-specific language for simulating declarative specifications of scheduling systems
+PY  - 2020
+DA  - 2020-11-15
+JO  - Companion Proceedings of the 2020 ACM SIGPLAN International Conference on Systems, Programming, Languages, and Applications: Software for Humanity
+VL  - 
+SP  - 
+EP  - 
+DO  - 10.1145/3426430.3428130
+UR  - https://consensus.app/papers/sasil-a-domainspecific-language-for-simulating-lee/ee5db25a6d165a22ad9868f60b0be2bc/
+ER  - 
+TY  - JOUR
+AU  - Fei, Yuxing
+AU  - Rendy, Bernardus
+AU  - Kumar, Rishi
+AU  - Dartsi, O.
+AU  - Sahasrabuddhe, Hrushikesh
+AU  - McDermott, Matthew
+AU  - Wang, Zheren
+AU  - Szymanski, N.
+AU  - Walters, Lauren
+AU  - Milsted, David
+AU  - Zeng, Yan
+AU  - Jain, Anubhav
+AU  - Ceder, Gerbrand
+TI  - AlabOS: A Python-based Reconfigurable Workflow Management Framework for Autonomous Laboratories
+PY  - 2024
+DA  - 2024-05-22
+JO  - ArXiv
+VL  - abs/2405.13930
+SP  - 
+EP  - 
+DO  - 10.1039/d4dd00129j
+UR  - https://consensus.app/papers/alabos-a-pythonbased-reconfigurable-workflow-management-fei-rendy/d33f673719df5e0c8bd17cc591939abe/
+ER  - 
+TY  - JOUR
+AU  - Li, Shengchao
+AU  - Liu, Shixin
+TI  - A Pattern-Based Decomposition Algorithm for Multi-Workstation Human Resource Allocation Under Spatial-Temporal Constraints
+PY  - 2026
+DA  - 2026-06-18
+JO  - Mathematics
+VL  - 
+SP  - 
+EP  - 
+DO  - 10.3390/math14122198
+UR  - https://consensus.app/papers/a-patternbased-decomposition-algorithm-for-li-liu/121a2f15141c5670ae8c8eafb59ddacc/
+ER  - 
+TY  - JOUR
+AU  - Cairo, Massimo
+AU  - Hunsberger, Luke
+AU  - Rizzi, Romeo
+TI  - Faster Dynamic Controllability Checking for Simple Temporal Networks with Uncertainty
+PY  - 2018
+DA  - 2018-01-01
+VL  - 
+SP  - 8
+EP  - 8
+DO  - 10.4230/lipics.time.2018.8
+UR  - https://consensus.app/papers/faster-dynamic-controllability-checking-for-simple-cairo-hunsberger/a9f728d21a155eea8d86a93d21a5dd8b/
+ER  - 
+TY  - CONF
+AU  - Hespanhol, P.
+AU  - Aswani, A.
+TI  - Family-Personalized Dietary Planning with Temporal Dynamics
+PY  - 2017
+DA  - 2017-03-23
+JO  - 2018 Annual American Control Conference (ACC)
+VL  - 
+SP  - 2163
+EP  - 2169
+DO  - 10.23919/acc.2018.8430885
+UR  - https://consensus.app/papers/familypersonalized-dietary-planning-with-temporal-hespanhol-aswani/edaa79a4efa6558cb5d04df4a0193dda/
+ER  - 
+TY  - CONF
+AU  - Kobayashi, Kosuke
+AU  - Katagiri, Hideki
+TI  - An Exact Solution Method for Cooking Scheduling Optimization Problems Considering Various Constraints of Cooking Facilities
+PY  - 2023
+DA  - 2023-11-14
+JO  - Proceedings of the International Conference on Industrial Engineering and Operations Management
+VL  - 
+SP  - 
+EP  - 
+DO  - 10.46254/au02.20230066
+UR  - https://consensus.app/papers/an-exact-solution-method-for-cooking-scheduling-kobayashi-katagiri/78558d80ae155662bdcfe369ecc7f0fd/
+ER  - 
+TY  - JOUR
+AU  - Cairo, Massimo
+AU  - Rizzi, Romeo
+TI  - Dynamic controllability of simple temporal networks with uncertainty: Simple rules and fast real-time execution
+PY  - 2019
+DA  - 2019-12-01
+JO  - Theor. Comput. Sci.
+VL  - 797
+SP  - 2
+EP  - 16
+DO  - 10.1016/j.tcs.2018.11.005
+UR  - https://consensus.app/papers/dynamic-controllability-of-simple-temporal-networks-with-cairo-rizzi/481e802c75915ec7b3e3c24288384656/
+ER  - 
+TY  - JOUR
+AU  - Hunsberger, Luke
+AU  - Posenato, Roberto
+TI  - Foundations of Dispatchability for Simple Temporal Networks with Uncertainty
+PY  - 2024
+DA  - 2024-01-01
+VL  - 
+SP  - 253
+EP  - 263
+DO  - 10.5220/0012360000003636
+UR  - https://consensus.app/papers/foundations-of-dispatchability-for-simple-temporal-hunsberger-posenato/964ceb9008e156c19259f06c4c51f383/
+ER  - 
+TY  - CONF
+AU  - Gao, Michael
+AU  - Popowski, Lindsay
+AU  - Boerkoel, James
+TI  - Dynamic Control of Probabilistic Simple Temporal Networks
+PY  - 2020
+DA  - 2020-04-03
+VL  - 
+SP  - 9851
+EP  - 9858
+DO  - 10.1609/aaai.v34i06.6538
+UR  - https://consensus.app/papers/dynamic-control-of-probabilistic-simple-temporal-gao-popowski/32ded56dbc785460be263c3220a78695/
+ER  - 
+TY  - JOUR
+AU  - Saint-Guillain, M.
+AU  - Vaquero, T.
+AU  - Chien, Steve Ankuo
+AU  - Agrawal, Jagriti
+AU  - Abrahams, J.
+TI  - Probabilistic Temporal Networks with Ordinary Distributions: Theory, Robustness and Expected Utility
+PY  - 2021
+DA  - 2021-08-27
+JO  - J. Artif. Intell. Res.
+VL  - 71
+SP  - 1091
+EP  - 1136
+DO  - 10.1613/jair.1.13019
+UR  - https://consensus.app/papers/probabilistic-temporal-networks-with-ordinary-saint-guillain-vaquero/98203c1b364a5ddfa032f555b1d9fc12/
+ER  - 
+TY  - JOUR
+AU  - Bit-Monnot, Arthur
+AU  - Morris, P.
+TI  - Dynamic Controllability of Temporal Plans in Uncertain and Partially Observable Environments
+PY  - 2023
+DA  - 2023-08-08
+JO  - J. Artif. Intell. Res.
+VL  - 77
+SP  - 1311
+EP  - 1369
+DO  - 10.1613/jair.1.13065
+UR  - https://consensus.app/papers/dynamic-controllability-of-temporal-plans-in-uncertain-bit-monnot-morris/03a261fc4dbc50d79510603e3afa28b8/
+ER  - 
+TY  - JOUR
+AU  - Guley, H.
+AU  - Stinson, J.
+TI  - Scheduling and resource allocation in a food service system
+PY  - 1984
+DA  - 1984-02-01
+JO  - Journal of Operations Management
+VL  - 4
+SP  - 129
+EP  - 144
+DO  - 10.1016/0272-6963(84)90028-7
+UR  - https://consensus.app/papers/scheduling-and-resource-allocation-in-a-food-service-guley-stinson/f2fab572dec955b08669d06844016d5c/
+ER  - 
+TY  - JOUR
+AU  - Itoh, Takeshi
+AU  - Horinouchi, Takaaki
+AU  - Uchida, Hiroki
+AU  - Takahashi, Koichi
+AU  - Ozaki, Haruka
+TI  - Optimal Scheduling for Laboratory Automation of Life Science Experiments with Time Constraints
+PY  - 2021
+DA  - 2021-06-25
+JO  - Slas Technology
+VL  - 26
+SP  - 650
+EP  - 659
+DO  - 10.1177/24726303211021790
+UR  - https://consensus.app/papers/optimal-scheduling-for-laboratory-automation-of-life-itoh-horinouchi/b19447a945a554158bdf85960c23d58b/
+ER  - 
+TY  - JOUR
+AU  - Singh, Gamini
+AU  - Madisetti, Vijay
+TI  - MCP-Secure: A Runtime Access Control Layer for Privilege-Aware LLM Agent Tooling
+PY  - 2026
+DA  - 
+JO  - IEEE Open Journal of the Computer Society
+VL  - 7
+SP  - 504
+EP  - 513
+DO  - 10.1109/ojcs.2026.3664314
+UR  - https://consensus.app/papers/mcpsecure-a-runtime-access-control-layer-for-singh-madisetti/d1d020ac77795bd89e29ae6eb4062ba7/
+ER  - 
+TY  - JOUR
+AU  - Demeyer, R.
+AU  - Assche, M.
+AU  - Langevine, Ludovic
+AU  - Vanhoof, Wim
+TI  - Declarative workflows to efficiently manage flexible and advanced business processes
+PY  - 2010
+DA  - 2010-07-26
+VL  - 
+SP  - 209
+EP  - 218
+DO  - 10.1145/1836089.1836116
+UR  - https://consensus.app/papers/declarative-workflows-to-efficiently-manage-flexible-and-demeyer-assche/f0396dbf8dcf5dd28c59b82fc9113ab7/
+ER  - 
+TY  - BOOK
+AU  - Steenvoorden, Tim
+AU  - Naus, Nico
+AU  - Klinik, M.
+TI  - TopHat: A formal foundation for task-oriented programming
+PY  - 2019
+DA  - 2019-10-07
+JO  - Proceedings of the 21st International Symposium on Principles and Practice of Declarative Programming
+VL  - 
+SP  - 
+EP  - 
+DO  - 10.1145/3354166.3354182
+UR  - https://consensus.app/papers/tophat-a-formal-foundation-for-taskoriented-programming-steenvoorden-naus/245b3e4d9dc9546e9b25a78cc85e9b30/
+ER  - 
+TY  - JOUR
+AU  - Wikarek, J.
+AU  - Sitek, P.
+TI  - A Constraint-Based Declarative Programming Framework for Scheduling and Resource Allocation Problems
+PY  - 2019
+DA  - 2019-02-01
+JO  - Vietnam. J. Comput. Sci.
+VL  - 6
+SP  - 69
+EP  - 90
+DO  - 10.1142/s2196888819500027
+UR  - https://consensus.app/papers/a-constraintbased-declarative-programming-framework-for-wikarek-sitek/3fd7ba295ae7505c91577ea756a7f7fb/
+ER  - 
+TY  - CONF
+AU  - Fei, Kong
+AU  - Li, Jun-Ming
+TI  - Design and research of intelligent algorithm for laboratory resource scheduling
+PY  - 2026
+DA  - 2026-05-04
+VL  - 14239
+SP  - 142391
+EP  - 142391
+DO  - 10.1117/12.3110255
+UR  - https://consensus.app/papers/design-and-research-of-intelligent-algorithm-for-fei-li/fef8623982845e27b48520e67250136d/
+ER  - 
+TY  - JOUR
+AU  - Wu, Zirui
+AU  - Liu, Xiao
+AU  - Li, Jiayi
+AU  - Kong, Lingpeng
+AU  - Feng, Yansong
+TI  - Haste Makes Waste: Evaluating Planning Abilities of LLMs for Efficient and Feasible Multitasking with Time Constraints Between Actions
+PY  - 2025
+DA  - 2025-03-04
+JO  - ArXiv
+VL  - abs/2503.02238
+SP  - 
+EP  - 
+DO  - 10.48550/arxiv.2503.02238
+UR  - https://consensus.app/papers/haste-makes-waste-evaluating-planning-abilities-of-llms-wu-liu/9ecb0d13fdea59d1bb0defeda98e2707/
+ER  - 
+TY  - JOUR
+AU  - Kong, F.
+AU  - Dou, Dong
+TI  - Resource-Constrained Project Scheduling Problem under Multiple Time Constraints
+PY  - 2021
+DA  - 2021-02-01
+JO  - Journal of Construction Engineering and Management
+VL  - 
+SP  - 
+EP  - 
+DO  - 10.1061/(asce)co.1943-7862.0001990
+UR  - https://consensus.app/papers/resourceconstrained-project-scheduling-problem-under-kong-dou/5b6a7ea1780c5aac8b13c89ada2f0795/
+ER  - 
+TY  - JOUR
+AU  - Kolisch, R.
+AU  - Hartmann, S.
+TI  - Heuristic algorithms for the resource-constrained project scheduling problem: classification and computational analysis
+PY  - 1999
+DA  - 1999-01-01
+VL  - 
+SP  - 147
+EP  - 178
+DO  - 10.1007/978-1-4615-5533-9_7
+UR  - https://consensus.app/papers/heuristic-algorithms-for-the-resourceconstrained-kolisch-hartmann/8f780fd9fe7a5b36a029098402c4f125/
+ER  - 
+TY  - JOUR
+AU  - Thompson, Gary
+TI  - Food Preparation Scheduling Tool
+PY  - 2016
+DA  - 2016-01-01
+VL  - 
+SP  - 
+EP  - 
+UR  - https://consensus.app/papers/food-preparation-scheduling-tool-thompson/271965fad997558880e47808282c44ab/
+ER  - 
+TY  - JOUR
+AU  - Barbaro, Luca
+AU  - Varricchione, Giovanni
+AU  - Montali, Marco
+AU  - Di Ciccio, Claudio
+TI  - From Sound Workflow Nets to LTLf Declarative Specifications by Casting Three Spells
+PY  - 2025
+DA  - 2025-04-07
+JO  - ArXiv
+VL  - abs/2504.05114
+SP  - 
+EP  - 
+DO  - 10.1007/978-3-032-02929-4_1
+UR  - https://consensus.app/papers/from-sound-workflow-nets-to-ltlf-declarative-barbaro-varricchione/7d6b6503f7f15a3eb36e6d1841836efc/
+ER  - 
+TY  - JOUR
+AU  - Xiong, Tianhong
+AU  - Xu, Yang
+AU  - Yu, Yang
+AU  - Lou, Dingjun
+TI  - Research on Temporal Workflow Task Assignment Strategy
+PY  - 2022
+DA  - 2022-01-01
+VL  - 
+SP  - 148
+EP  - 163
+DO  - 10.1007/978-981-19-4546-5_12
+UR  - https://consensus.app/papers/research-on-temporal-workflow-task-assignment-strategy-xiong-xu/a1c4ee981d5f59fd80e4a250891c976a/
+ER  - 
+TY  - JOUR
+AU  - Hedea, Ioan
+TI  - Algorithms for dynamic scheduling in manufacturing, towards digital factories Improving Deadline Feasibility and Responsiveness via Temporal Networks
+PY  - 2025
+DA  - 2025-10-16
+JO  - ArXiv
+VL  - abs/2510.16047
+SP  - 
+EP  - 
+DO  - 10.48550/arxiv.2510.16047
+UR  - https://consensus.app/papers/algorithms-for-dynamic-scheduling-in-manufacturing-hedea/669a80d0b9b251bb98e1d23457450f73/
+ER  - 
+TY  - JOUR
+AU  - Kafeza, Eleanna
+TI  - Advanced Temporal Constraints for Business Processes Modelling and Execution
+PY  - 2018
+DA  - 2018-10-01
+JO  - Int. J. Syst. Serv. Oriented Eng.
+VL  - 8
+SP  - 1
+EP  - 25
+DO  - 10.4018/ijssoe.2018100101
+UR  - https://consensus.app/papers/advanced-temporal-constraints-for-business-processes-kafeza/1e49175d97fe52f587e651a40dc173ac/
+ER  - 
+TY  - JOUR
+AU  - Kreter, Stefan
+AU  - Rieck, Julia
+AU  - Zimmermann, J.
+TI  - Models and solution procedures for the resource-constrained project scheduling problem with general temporal constraints and calendars
+PY  - 2016
+DA  - 2016-06-01
+JO  - Eur. J. Oper. Res.
+VL  - 251
+SP  - 387
+EP  - 403
+DO  - 10.1016/j.ejor.2015.11.021
+UR  - https://consensus.app/papers/models-and-solution-procedures-for-the-kreter-rieck/c5bd566d1c2d5b7f9dc2423a47835280/
+ER  - 
+TY  - JOUR
+AU  - Golaba, Amir
+AU  - Gooyaa, Ehsan Sedgh
+AU  - Faloua, Ayman Al
+AU  - Cabona, Mikael
+TI  - Review of conventional metaheuristic techniques for resource-constrained project scheduling problem
+PY  - 2021
+DA  - 
+VL  - 
+SP  - 
+EP  - 
+UR  - https://consensus.app/papers/review-of-conventional-metaheuristic-techniques-for-golaba-gooyaa/5019a73980e3518480eb14387dab6991/
+ER  - 
+TY  - CONF
+AU  - Senkul, Pinar
+AU  - Kifer, M.
+AU  - Toroslu, I.
+TI  - A Logical Framework for Scheduling Workflows under Resource Allocation Constraints
+PY  - 2002
+DA  - 2002-08-20
+VL  - 
+SP  - 694
+EP  - 705
+DO  - 10.1016/b978-155860869-6/50067-6
+UR  - https://consensus.app/papers/a-logical-framework-for-scheduling-workflows-under-senkul-kifer/4273cdd163fc50daadb99f32e65d66ad/
+ER  - 
