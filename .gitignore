@@ -13,3 +13,4 @@ refs/*
 
 # Author copy of a copyrighted textbook, never redistributed (refs/* already covers this)
 refs/pinedo2016scheduling.pdf
+!figures/*.png

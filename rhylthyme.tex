@@ -8,6 +8,7 @@
 \usepackage{booktabs}
 \usepackage{array}
 \usepackage{graphicx}
+\usepackage{subcaption}
 \usepackage{listings}
 \usepackage{xcolor}
 \usepackage{tikz}
@@ -145,6 +146,63 @@ A \rt{} program is a JSON document validated against a JSON Schema (version 0.2.
 \label{sec:environments}
 An environment is a separate JSON document, validated against its own schema, that describes a workplace once so that many programs can share it. It has an \code{environmentId}, a \code{type} from a controlled list (37 values, from \code{kitchen} and \code{laboratory} to \code{theater}, \code{gym} and \code{datacenter}), \code{actorTypes} (named categories of people with a \code{count}), and \code{resourceConstraints}. Each constraint names a task, its \code{maxConcurrent} capacity, the fraction of a person it occupies (\code{actorsRequired}: an oven needs 0.5 of a cook, a microwave 0.25, a stove burner 1.0), and which actor types are \code{qualifiedActorTypes} for it. A program references an environment by id; the loader falls back to the default environment for the program's \code{environmentType} when none is named, and inline \code{resourceConstraints} on the program take precedence. The repository ships ten environments (home and commercial kitchens, academic, biotech and pharma laboratories, a bakery, an airport, a software team), and \code{create\_environment} on the MCP server produces new ones. A program that names neither an environment nor \code{actors} must declare a resource constraint for every task it uses. Environments are what let the same protocol be scheduled differently in a lab with one thermocycler and a lab with four; the attention and qualification fields are honoured by the command-line runner, while the web and MCP engines use only capacities and the program-level actor count.
 
+Listings~\ref{lst:env-kitchen} and~\ref{lst:env-lab} show two of them, trimmed to a
+few constraints each. A program picks an environment up in one of two ways: it names one
+in an \code{environment} field, or it declares an \code{environmentType} and the loader
+resolves that to the type's default environment. The consequence is that the same program
+runs unchanged in different workplaces --- the breakfast program of
+Section~\ref{sec:views} against the home kitchen of Listing~\ref{lst:env-kitchen} or
+against the six-burner commercial kitchen --- and what changes is capacity, not procedure:
+a schedule that is comfortable in one may be over-utilized in the other. The \code{actorsRequired} fractions are where attention rather
+than equipment is booked. A stove burner takes a whole cook, an oven half of one and a
+microwave a quarter, so the two cooks of Listing~\ref{lst:env-kitchen} can hold two
+burners, or a burner, the oven and the microwave, but not two burners and the oven;
+Listing~\ref{lst:env-lab} books a fume hood the same way (an entire person, against less
+than a third of one for a thermal cycler that runs itself) and restricts the hood and the
+centrifuge to the actor types trained for them, which the undergraduate is not. These
+fractions are the attention model referred to in Section~\ref{sec:discussion}.
+
+\begin{lstlisting}[caption={A home kitchen with two cooks, trimmed to three of its
+sixteen resource constraints: the oven is capacity-one and takes half a cook's attention,
+the four burners take a whole cook each, and the microwave a quarter.},label={lst:env-kitchen},float=tp]
+{ "environmentId": "home-kitchen", "name": "Home Kitchen",
+  "type": "kitchen", "actors": 2,
+  "actorTypes": {
+    "home-cook": { "name": "Home Cook", "count": 2 } },
+  "resourceConstraints": [
+    { "task": "oven", "maxConcurrent": 1, "actorsRequired": 0.5,
+      "qualifiedActorTypes": ["home-cook"],
+      "description": "Single oven (requires partial attention)" },
+    { "task": "stove-burner", "maxConcurrent": 4, "actorsRequired": 1.0,
+      "qualifiedActorTypes": ["home-cook"],
+      "description": "4-burner stovetop (one cook monitors all four)" },
+    { "task": "microwave", "maxConcurrent": 1, "actorsRequired": 0.25,
+      "qualifiedActorTypes": ["home-cook"],
+      "description": "Microwave oven (minimal attention needed)" } ] }
+\end{lstlisting}
+
+\begin{lstlisting}[caption={A small academic laboratory, trimmed to three of its
+twenty-seven constraints and three of its seven actor types. Two thermal cyclers run
+almost unattended; the fume hood (safety training required) and the centrifuge are
+restricted to qualified actor types, which exclude the undergraduate.},label={lst:env-lab},float=tp]
+{ "environmentId": "small-academic-lab",
+  "name": "Small Academic Laboratory", "type": "laboratory",
+  "actorTypes": {
+    "postdoc": { "name": "Postdoctoral Researcher", "count": 1 },
+    "grad-student": { "name": "Graduate Student", "count": 2 },
+    "undergrad": { "name": "Undergraduate Student", "count": 1 } },
+  "resourceConstraints": [
+    { "task": "pcr-thermal-cycler", "maxConcurrent": 2, "actorsRequired": 0.3,
+      "qualifiedActorTypes": ["postdoc", "grad-student", "undergrad"],
+      "description": "PCR thermal cyclers (96 wells, simple operation)" },
+    { "task": "fume-hood", "maxConcurrent": 1, "actorsRequired": 1.0,
+      "qualifiedActorTypes": ["postdoc", "grad-student"],
+      "description": "Chemical fume hood (4 ft, safety training required)" },
+    { "task": "centrifuge", "maxConcurrent": 1, "actorsRequired": 0.4,
+      "qualifiedActorTypes": ["postdoc", "grad-student"],
+      "description": "High-speed centrifuge (24 x 1.5 mL capacity)" } ] }
+\end{lstlisting}
+
 \paragraph{Replicates and staggered starts.}
 Repetition has a shorthand so that authors need not copy tracks. A track may declare \code{batch\_size} and \code{stagger}: \code{"batch\_size": 3, "stagger": "1m30s"} expands into three copies of the track whose starts are 90 seconds apart, and \code{templateId} with \code{templateParameters} lets those copies instantiate a shared \code{trackTemplates} entry with different values (three landings on one runway with different flight numbers, in the airport example). A track or step may instead declare \code{replicates} with a \code{count}, a \code{mode} of \code{parallel}, \code{stagger} or \code{serial}, and a \code{delay}; step-level parallel replicates fan out into sub-tracks that rejoin, serial replicates chain within the track, and staggered replicates delay each start by the given amount. Expansion happens before validation in both toolchains, so the validators, planners and runtimes only ever see plain tracks and steps.
 
@@ -175,11 +233,43 @@ The auto-planner, available from the web editor and as a Python module, works fr
 \section{Views in the web application}
 \label{sec:views}
 
-\paragraph{Timeline.} The timeline is a Gantt chart with one row per track and one bar per step, positioned by resolved start time and coloured by track (Figure~\ref{fig:thanksgiving} is the static form). It carries the execution controls: start, pause and stop, a speed multiplier for rehearsal, a zoom slider, and a time-format selector that switches the axis between elapsed minutes and time of day from a chosen start. While running, a cursor sweeps the chart, active steps are highlighted, audio cues fire at step boundaries, and variable and indefinite steps expose a control to end them. On the kitchen vertical an ingredient checklist sits beside it.
+\paragraph{Timeline.} The timeline is a Gantt chart with one row per track and one bar per step, positioned by resolved start time and coloured by track (Figure~\ref{fig:view-timeline}; Figure~\ref{fig:thanksgiving} is the static form). It carries the execution controls: start, pause and stop, a speed multiplier for rehearsal, a zoom slider, and a time-format selector that switches the axis between elapsed minutes and time of day from a chosen start. While running, a cursor sweeps the chart, active steps are highlighted, audio cues fire at step boundaries, and variable and indefinite steps expose a control to end them. On the kitchen vertical an ingredient checklist sits beside it.
 
-\paragraph{Itinerary.} The itinerary is the same schedule sorted by clock time regardless of track: a chronological list of ``at 17:12 start the potatoes'' entries with each step's track, duration and description. It is the view a person reads when they want to know what to do next rather than how the tracks relate, and it is the text form the MCP server returns in its previews.
+\paragraph{Itinerary.} The itinerary is the same schedule sorted by clock time regardless of track: a chronological list of ``at 17:12 start the potatoes'' entries with each step's track, duration and description. It is the view a person reads when they want to know what to do next rather than how the tracks relate, and it is the text form the MCP server returns in its previews. Figure~\ref{fig:view-itinerary-dag} (left) shows it for the program of Figure~\ref{fig:view-timeline}.
 
-\paragraph{Dependency graph.} The DAG view draws steps as nodes and triggers as edges, with buffered edges styled distinctly, so that cross-track dependencies and choice branches, which the timeline can only show by position, are explicit. It is the view used when editing a program's structure.
+\paragraph{Dependency graph.} The DAG view draws steps as nodes and triggers as edges, with buffered edges styled distinctly, so that cross-track dependencies and choice branches, which the timeline can only show by position, are explicit. It is the view used when editing a program's structure. Figure~\ref{fig:view-itinerary-dag} (right) shows it for the breakfast program, and Figure~\ref{fig:view-dag-lab} for a laboratory one.
+
+\begin{figure}[t]
+  \centering
+  \includegraphics[width=\linewidth]{figures/view-timeline.png}
+  \caption{The timeline view of \emph{Breakfast Schedule} (three tracks) nine seconds into a run. The control bar carries start, pause and stop, a speed selector (here $1\times$), the elapsed time and run status (\emph{Running}), a zoom slider and a time-format selector that switches the axis between elapsed minutes and time of day. The dashed red cursor sweeps the chart and stands at 0:09, over the two steps that are active (``Crack and Whisk Eggs'' and ``Prepare Bacon''). ``Heat Pan'' is a variable step (60--120\,s, planned at 90): the dashed line inside its bar marks the minimum, and the hatched segment at its end marks the part the executor may cut short. The Toast row is still empty because ``Make Toast'' starts 480\,s after program start.}
+  \label{fig:view-timeline}
+\end{figure}
+
+\begin{figure}[t]
+  \centering
+  \begin{subfigure}[t]{0.42\linewidth}
+    \centering
+    \includegraphics[width=\linewidth]{figures/view-itinerary.png}
+    \caption{Itinerary}
+    \label{fig:view-itinerary}
+  \end{subfigure}\hfill
+  \begin{subfigure}[t]{0.55\linewidth}
+    \centering
+    \includegraphics[width=\linewidth]{figures/view-dag.png}
+    \caption{Dependency graph}
+    \label{fig:view-dag}
+  \end{subfigure}
+  \caption{Two more views of the program in Figure~\ref{fig:view-timeline}. (a)~The itinerary flattens the schedule into one chronological list of start time, step, track colour and description: the form a person reads at the stove or the bench to know what to do next. (b)~The dependency graph shows the same program by structure rather than by clock: solid edges are start triggers from program start or from a preceding step, and the dashed edge labelled 480s is the \code{programStartOffset} of ``Make Toast,'' the one step pinned to the clock rather than to another step.}
+  \label{fig:view-itinerary-dag}
+\end{figure}
+
+\begin{figure}[t]
+  \centering
+  \includegraphics[width=0.8\linewidth]{figures/view-dag-lab.png}
+  \caption{The same dependency-graph view on a laboratory program, \emph{Cell Culture Viability Assay}. Three tracks (cell culture in blue, drug treatment in magenta, viability analysis in orange) chain through an overnight incubation and a 24-hour treatment into the viability read (reagent, plate absorbance, analysis). Nothing in the view is specific to kitchens: like the schema, it is vertical-independent.}
+  \label{fig:view-dag-lab}
+\end{figure}
 
 \paragraph{Others.} A resources view plots each task's concurrent usage against its capacity over time, which is where over-utilization is seen; a radial view wraps the timeline around a clock face; a kanban view groups steps by state during execution; a fold view collapses the program into the sequence of merge points; an editor view exposes drag-to-reschedule and the auto-planner strategies of Section~\ref{sec:optim}; and a video view plays step media where a program provides it. The web application also hosts a public catalog of programs, per-user libraries, and per-vertical hosts that differ only in defaults and copy.
 
@@ -222,28 +312,7 @@ The Model Context Protocol~\cite{anthropic2024mcp} standardizes how a language-m
 \section{Discussion: positioning}
 \label{sec:discussion}
 
-Table~\ref{tab:position} summarizes the comparison. \rt{} \emph{borrows} the Gantt row-per-track grammar, the RCPSP resource model, the idea of a critical chain, and the trigger vocabulary of temporal constraint networks. It \emph{omits} what most of the compared systems are built around: it does not optimize an objective, does not reason about durations outside the executor's control, does not solve actor assignment, and does not execute anything on a machine. What is \emph{new} is narrower than a new model of human work: in the language and both runtimes the person is a capacity-one resource whose duration oracle is a button, and the human-specific constructs are the triggers that wait for that button, the attention fractions in environments, and the affordances of the runtimes. The claim is that no compared system combines capacity constraints and cross-track dependencies with a followable, human-executed timeline that has manual, executor-ended and abort steps; that the same schema is used unchanged across cooking, laboratory, event and training verticals, with domain content kept in metadata and environments rather than in the schema; and that validation, analysis and publication are exposed as typed, annotated tool calls rather than as instructions in a prompt. Table~\ref{tab:position} compares traditions rather than individual systems, so its cells describe the mainstream of each column, and specific systems (a workflow platform's MCP server, a lab orchestrator's guided manual steps) already occupy some of the cells the \rt{} column claims.
-
-\begin{table}[t]
-  \centering\scriptsize
-  \setlength{\tabcolsep}{3.5pt}
-  \begin{tabular}{@{}lR{2.1cm}R{2.1cm}R{2.1cm}R{2.3cm}R{2.2cm}R{2.4cm}@{}}
-    \toprule
-    Axis & CPM / PERT / RCPSP & ATC flow mgmt & Robot task scheduling & Lab automation orchestrators & Workflow engines & \textbf{\rt{}} \\
-    \midrule
-    Executor & human, offline & controllers, airlines, live & robots and human--robot teams & instruments, robots, guided manual steps & compute nodes & \textbf{a person, live} \\
-    Author & analyst, PM & traffic manager & roboticist & automation engineer & bioinformatician & \textbf{domain expert or LLM agent} \\
-    Temporal semantics & precedence + durations & slots, windows, replanned & STN/STNU, temporospatial & synchronization, stations & data-dependency DAG & \textbf{wall-clock triggers incl.\ manual, indefinite} \\
-    Objective & makespan, NPV & delay cost under capacity & feasible or near-optimal & throughput under scientific constraints & reproducible, portable output & \textbf{followable timeline; feasibility, conflicts} \\
-    Resources & renewable & sector, airport capacity & robot capabilities & stations & CPU, memory, containers & \textbf{maxConcurrent per task; actors (attention in the CLI runner)} \\
-    Uncertainty & PERT beta, stochastic & stochastic demand & contingent durations & process variance & retries & \textbf{variable and indefinite, executor-ended} \\
-    Portability & tool-specific & domain-specific & domain-specific & SiLA, Autoprotocol & containers, standards & \textbf{one schema, environments per workplace} \\
-    Agent interface & none & none & none & emerging (vendor and community MCP servers) & emerging (vendor MCP servers) & \textbf{native MCP} \\
-    \bottomrule
-  \end{tabular}
-  \caption{Positioning \rt{} against the traditions in Section~2. Cells describe the mainstream of each tradition, not every system in it.}
-  \label{tab:position}
-\end{table}
+Summarizing the comparison, \rt{} \emph{borrows} the Gantt row-per-track grammar, the RCPSP resource model, the idea of a critical chain, and the trigger vocabulary of temporal constraint networks. It \emph{omits} what most of the compared systems are built around: it does not optimize an objective, does not reason about durations outside the executor's control, does not solve actor assignment, and does not execute anything on a machine. What is \emph{new} is narrower than a new model of human work: in the language and both runtimes the person is a capacity-one resource whose duration oracle is a button, and the human-specific constructs are the triggers that wait for that button, the attention fractions in environments, and the affordances of the runtimes. The claim is that no compared system combines capacity constraints and cross-track dependencies with a followable, human-executed timeline that has manual, executor-ended and abort steps; that the same schema is used unchanged across cooking, laboratory, event and training verticals, with domain content kept in metadata and environments rather than in the schema; and that validation, analysis and publication are exposed as typed, annotated tool calls rather than as instructions in a prompt. The comparison is with traditions rather than with individual systems: it describes the mainstream of each, and specific systems (a workflow platform's MCP server, a lab orchestrator's guided manual steps) already occupy some of the ground claimed here.
 
 The nearest neighbours deserve a direct comparison. The cooking-step schedulers of Matsushima and Funabiki and of Nakabe et al.~\cite{matsushima2015cooking,nakabe2021cooking} and the SDL scheduler of Zhou et al.~\cite{zhou2026sdlscheduling} model the same objects (parallel procedures, shared stations, tight synchronization) and solve for an optimized procedure; \rt{} would be a natural \emph{target} for their output, since none produces a shareable runtime or an agent interface. Protocol run modes and guided-cooking timers are the other neighbour: they have the runtime but not the model, so a second dish or a second protocol cannot be placed against the first. The mixed-initiative scheduling workbenches~\cite{hsu1993macmerl,norbis1996interactive} had both a model and a human in the loop, but the human's role was to edit the schedule, not to execute it. Workflow engines and lab orchestrators, finally, would be natural \emph{consumers} of \rt{}'s trigger vocabulary if the executor were a machine; the language is agnostic about that, but the runtimes are not.
 
