@@ -10,3 +10,6 @@ refs/*
 *.synctex.gz
 *.png
 .DS_Store
+
+# Author copy of a copyrighted textbook, never redistributed (refs/* already covers this)
+refs/pinedo2016scheduling.pdf

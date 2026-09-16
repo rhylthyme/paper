@@ -2,13 +2,14 @@
 
 Files are named by BibTeX key. Every PDF was checked against its first-page text to be the cited work. Sources: arXiv, publisher and repository open-access copies, standards-body pages, and PDFs supplied by the author.
 
-58 cited works, all 58 on file (6 printed from web pages with headless Chrome; the BPMN entry is the official OMG specification PDF; 8 are arXiv versions of the cited venue papers; one, `mckeever2025scheduler`, is a bioRxiv preprint). Summaries of every file follow the table.
+78 cited works, 76 on file (7 printed from web pages with headless Chrome; the BPMN entry is the official OMG specification PDF; 11 are arXiv versions of the cited venue papers; one, `mckeever2025scheduler`, is a bioRxiv preprint). Two, `buehler1994planning` and `hamada2005cookingnavi`, are paywalled with no legal open-access copy and are not on file. One of the 76, `pinedo2016scheduling.pdf`, is the author's own copy of a copyrighted textbook and is never redistributed. Summaries follow the table for the first 58 files.
 
 | key | title | file | status | identifier |
 |---|---|---|---|---|
 | `abbott2015programs` | Programs for people: What we can learn from lab protocols | abbott2015programs.pdf | PDF | https://doi.org/10.1109/VLHCC.2015.7357218 |
 | `allen1983intervals` | Maintaining knowledge about temporal intervals | allen1983intervals.pdf | PDF | https://doi.org/10.1145/182.358434 |
 | `almuntashiri2025provenance` | Using LLMs to infer provenance information | almuntashiri2025provenance.pdf | PDF (publisher, open access) | https://doi.org/10.1145/3736229.3736261 |
+| `ananthanarayanan2010biocoder` | BioCoder: A programming language for standardizing and automating biology protocols | ananthanarayanan2010biocoder.pdf | PDF (publisher, open access) | https://doi.org/10.1186/1754-1611-4-13 |
 | `angelopoulos2026prompts` | From prompts to protocols: An AI | angelopoulos2026prompts.pdf | PDF | https://doi.org/10.48550/arXiv.2605.16552 |
 | `anthropic2024mcp` | Introducing the Model Context Protocol | anthropic2024mcp.pdf | PDF (printed web page) | https://www.anthropic.com/news/model-context-protocol |
 | `autoprotocol` | Autoprotocol | autoprotocol.pdf | PDF (printed web page) | https://autoprotocol.org/ |
@@ -16,9 +17,12 @@ Files are named by BibTeX key. Every PDF was checked against its first-page text
 | `ball2003groundholding` | A stochastic integer program with dual network structure and its application to the ground-holding problem | ball2003groundholding.pdf | PDF | https://doi.org/10.1287/opre.51.1.167.12795 |
 | `benyamin2025copilot` | Toward PDDL | benyamin2025copilot.pdf | PDF | https://doi.org/10.48550/arXiv.2509.12987 |
 | `bertsimas1998atfm` | The air traffic flow management problem with enroute capacities | bertsimas1998atfm.pdf | PDF | https://doi.org/10.1287/opre.46.3.406 |
+| `bien2020recipenlg` | RecipeNLG: A cooking recipes dataset for semi-structured text generation | bien2020recipenlg.pdf | PDF (ACL Anthology) | https://doi.org/10.18653/v1/2020.inlg-1.4 |
 | `brucker1999rcpsp` | Resource-constrained project scheduling: Notation, classification, models, and methods | brucker1999rcpsp.pdf | PDF | https://doi.org/10.1016/S0377-2217(98)00204-5 |
+| `buehler1994planning` | Exploring the "planning fallacy": Why people underestimate their task completion times | -- | paywalled (no OA copy) | https://doi.org/10.1037/0022-3514.67.3.366 |
 | `colledanchise2018bt` | Behavior Trees in Robotics and AI | colledanchise2018bt.pdf | PDF | https://doi.org/10.1201/9780429489105 |
 | `cui2023probio` | ProBio: A protocol-guided multimodal dataset for molecular biology lab | cui2023probio.pdf | PDF (arXiv) | https://doi.org/10.52202/075280-1799 |
+| `dagdelen2024extraction` | Structured information extraction from scientific text with large language models | dagdelen2024extraction.pdf | PDF (publisher, open access) | https://doi.org/10.1038/s41467-024-45563-x |
 | `dahlberg2019arteria` | Arteria: An automation system for a sequencing core facility | dahlberg2019arteria.pdf | PDF (publisher, open access) | https://doi.org/10.1093/gigascience/giz135 |
 | `damen2018epic` | Scaling egocentric vision: The EPIC-KITCHENS dataset | damen2018epic.pdf | PDF (arXiv) | https://doi.org/10.1007/978-3-030-01225-0_44 |
 | `dechter1991tcn` | Temporal constraint networks | dechter1991tcn.pdf | PDF | https://doi.org/10.1016/0004-3702(91)90006-6 |
@@ -27,10 +31,14 @@ Files are named by BibTeX key. Every PDF was checked against its first-page text
 | `gombolay2018tercio` | Fast scheduling of robot teams performing tasks with temporospatial constraints | gombolay2018tercio.pdf | PDF | https://doi.org/10.1109/TRO.2018.2795034 |
 | `grauman2022ego4d` | Ego4D: Around the world in 3,000 hours of egocentric video | grauman2022ego4d.pdf | PDF (arXiv) | https://doi.org/10.1109/CVPR52688.2022.01842 |
 | `guley1984foodservice` | Scheduling and resource allocation in a food service system | guley1984foodservice.pdf | PDF | https://doi.org/10.1016/0272-6963(84)90028-7 |
+| `hamada2005cookingnavi` | Cooking navi: Assistant for daily cooking in kitchen | -- | paywalled (no OA copy) | https://doi.org/10.1145/1101149.1101228 |
 | `hobbs2004owltime` | An ontology of time for the semantic web | hobbs2004owltime.pdf | PDF | https://doi.org/10.1145/1017068.1017073 |
 | `hsu1993macmerl` | A mixed-initiative scheduling workbench integrating AI | hsu1993macmerl.pdf | PDF | https://doi.org/10.1016/0167-9236(93)90056-9 |
+| `kahneman1979intuitive` | Intuitive prediction: Biases and corrective procedures | kahneman1979intuitive.pdf | PDF (official DTIC report ADA047747) | https://apps.dtic.mil/sti/citations/ADA047747 |
+| `kambhampati2024llmmodulo` | LLMs can't plan, but can help planning in LLM-Modulo frameworks | kambhampati2024llmmodulo.pdf | PDF (arXiv) | https://arxiv.org/abs/2402.01817 |
 | `kelleher1997rescheduling` | Scheduling and rescheduling | kelleher1997rescheduling.pdf | PDF | https://doi.org/10.1049/ic:19970343 |
 | `kelley1959cpm` | Critical-path planning and scheduling | kelley1959cpm.pdf | PDF | https://doi.org/10.1145/1460299.1460318 |
+| `kiddon2015mise` | Mise en place: Unsupervised interpretation of instructional recipes | kiddon2015mise.pdf | PDF (ACL Anthology) | https://doi.org/10.18653/v1/D15-1114 |
 | `kolisch2001survey` | An integrated survey of deterministic project scheduling | kolisch2001survey.pdf | PDF | https://doi.org/10.1016/S0305-0483(00)00046-3 |
 | `kong2022survey` | Human action recognition and prediction: A survey | kong2022survey.pdf | PDF (arXiv) | https://doi.org/10.1007/s11263-022-01594-9 |
 | `korsah2013mrta` | A comprehensive taxonomy for multi-robot task allocation | korsah2013mrta.pdf | PDF | https://doi.org/10.1177/0278364913496484 |
@@ -41,22 +49,34 @@ Files are named by BibTeX key. Every PDF was checked against its first-page text
 | `matsushima2015cooking` | A cooking-step scheduling algorithm with guidance system for homemade cooking | matsushima2015cooking.pdf | PDF | https://doi.org/10.1587/transinf.2015EDP7048 |
 | `mckeever2025scheduler` | User-friendly scheduler using a hybrid architecture and supercomputing for big data processing | mckeever2025scheduler.pdf | PDF (bioRxiv preprint) | https://doi.org/10.1101/2025.09.01.673517 |
 | `mcpspec2025` | Model Context Protocol | mcpspec2025.pdf | PDF (printed web page) | https://modelcontextprotocol.io/specification/2025-06-18 |
+| `moreau2013provdm` | PROV-DM: The PROV Data Model | moreau2013provdm.pdf | PDF (printed W3C Recommendation) | https://www.w3.org/TR/2013/REC-prov-dm-20130430/ |
+| `mori2014flowgraph` | Flow graph corpus from recipe texts | mori2014flowgraph.pdf | PDF (LREC 2014 proceedings) | https://doi.org/10.63317/5gpnteuutj4x |
 | `morris2001dc` | Dynamic control of plans with temporal uncertainty | morris2001dc.pdf | PDF |  |
 | `nakabe2021cooking` | Optimal cooking procedure presentation system for multiple recipes and investigating its effect | nakabe2021cooking.pdf | PDF | https://doi.org/10.3390/a14020067 |
 | `norbis1996interactive` | An interactive decision support system for the resource constrained scheduling problem | norbis1996interactive.pdf | PDF | https://doi.org/10.1016/0377-2217(95)00187-5 |
 | `omg2011bpmn` | Business Process Model and Notation | omg2011bpmn.pdf | PDF (official specification) | https://www.omg.org/spec/BPMN/2.0/ |
 | `opentronsapi` | Opentrons | opentronsapi.pdf | PDF (printed web page) | https://docs.opentrons.com/python-api/ |
 | `parmar2026mcpworkflow` | Separating intelligence from execution: A workflow engine for the Model Context Protocol | parmar2026mcpworkflow.pdf | PDF | https://doi.org/10.48550/arXiv.2605.00827 |
+| `pinedo2016scheduling` | Scheduling: Theory, Algorithms, and Systems, 5th edition | pinedo2016scheduling.pdf | author's own copy, not redistributed | https://doi.org/10.1007/978-3-319-26580-3 |
 | `rahmanian2022helao` | Enabling modular autonomous feedback-loops in materials science through hierarchical experimental laboratory automation and orchestration | rahmanian2022helao.pdf | PDF | https://doi.org/10.1002/admi.202101987 |
+| `roggesolti2013remaining` | Prediction of remaining service execution time using stochastic Petri nets with arbitrary firing delays | roggesolti2013remaining.pdf | PDF (publisher, free to read) | https://doi.org/10.1007/978-3-642-45005-1_27 |
 | `sener2022assembly101` | Assembly101: A large-scale multi-view video dataset for understanding procedural activities | sener2022assembly101.pdf | PDF (arXiv) | https://doi.org/10.1109/CVPR52688.2022.02042 |
 | `shi2024protocol` | Expert-level protocol translation for self-driving labs | shi2024protocol.pdf | PDF | https://doi.org/10.48550/arXiv.2411.00444 |
 | `sila2` | SiLA | sila2.pdf | PDF (printed web page) | https://sila-standard.com/standards/ |
+| `steiner2019chemputer` | Organic synthesis in a modular robotic system driven by a chemical programming language | steiner2019chemputer.pdf | PDF (accepted manuscript, institutional repository) | https://doi.org/10.1126/science.aav2211 |
 | `teytelman2016protocolsio` | Protocols.io | teytelman2016protocolsio.pdf | PDF | https://doi.org/10.1371/journal.pbio.1002538 |
 | `tom2024sdl` | Self-driving laboratories for chemistry and materials science | tom2024sdl.pdf | PDF | https://doi.org/10.1021/acs.chemrev.4c00055 |
+| `tran2005collage` | Cook's Collage: Deja vu display for a home kitchen | tran2005collage.pdf | PDF (publisher) | https://doi.org/10.1007/11402985_2 |
 | `twinanda2017endonet` | EndoNet: A deep architecture for recognition tasks on laparoscopic videos | twinanda2017endonet.pdf | PDF (arXiv) | https://doi.org/10.1109/TMI.2016.2593957 |
+| `valmeekam2023planbench` | PlanBench: An extensible benchmark for evaluating large language models on planning and reasoning about change | valmeekam2023planbench.pdf | PDF (arXiv) | https://arxiv.org/abs/2206.10498 |
+| `vanderaalst1998petri` | The application of Petri nets to workflow management | vanderaalst1998petri.pdf | PDF (author's copy) | https://doi.org/10.1142/S0218126698000043 |
+| `vanderaalst2003patterns` | Workflow patterns | vanderaalst2003patterns.pdf | PDF (authors' copy; technical-report version) | https://doi.org/10.1023/A:1022883727209 |
+| `vanderaalst2011prediction` | Time prediction based on process mining | vanderaalst2011prediction.pdf | PDF (author's copy) | https://doi.org/10.1016/j.is.2010.09.001 |
 | `vidal1999stnu` | Handling contingency in temporal constraint networks: from consistency to controllabilities | vidal1999stnu.pdf | PDF | https://doi.org/10.1080/095281399146607 |
+| `vrana2021aquarium` | Aquarium: open-source laboratory software for design, execution and data management | vrana2021aquarium.pdf | PDF (publisher, gold OA) | https://doi.org/10.1093/synbio/ysab006 |
 | `w3c2020owltime` | Time Ontology in OWL | w3c2020owltime.pdf | PDF (printed web page) | https://www.w3.org/TR/2020/CR-owl-time-20200326 |
 | `wambsganss1996cdm` | Collaborative decision making through dynamic information transfer | wambsganss1996cdm.pdf | PDF | https://doi.org/10.2514/atcq.4.2.109 |
+| `white2023prompts` | A prompt pattern catalog to enhance prompt engineering with ChatGPT | white2023prompts.pdf | PDF (arXiv) | https://arxiv.org/abs/2302.11382 |
 | `wierenga2023pylabrobot` | PyLabRobot | wierenga2023pylabrobot.pdf | PDF | https://doi.org/10.1016/j.device.2023.100111 |
 | `wilson2003gantt` | Gantt | wilson2003gantt.pdf | PDF | https://doi.org/10.1016/S0377-2217(02)00769-5 |
 | `xu2026labsafety` | A multimodal framework integrating procedural texts and visual perception for laboratory safety monitoring | xu2026labsafety.pdf | PDF (publisher, open access) | https://doi.org/10.69997/sct.104078 |
@@ -64,6 +84,34 @@ Files are named by BibTeX key. Every PDF was checked against its first-page text
 | `yu2017timing` | Effects of timing on users' agency during mixed-initiative interaction | yu2017timing.pdf | PDF | https://doi.org/10.14236/ewic/HCI2017.35 |
 | `zhou2026ontology` | Ontology-to-tools compilation for executable semantic constraint enforcement in LLM | zhou2026ontology.pdf | PDF | https://doi.org/10.48550/arXiv.2602.03439 |
 | `zhou2026sdlscheduling` | Multi-task scheduling of self-driving laboratories under scientific constraints | zhou2026sdlscheduling.pdf | PDF (author-supplied) | https://doi.org/10.1039/d6sc03892a |
+
+
+## Sources for the September 2026 additions
+
+Twenty references were added in one pass. Only legitimate open-access sources were used (publisher OA, arXiv, ACL Anthology and the LREC proceedings site, authors' own institutional or personal copies, W3C and DTIC official copies). Two have no legal open-access copy and were not downloaded; the Pinedo textbook is the author's own purchased copy and is never committed.
+
+| bibkey | source URL | status |
+|---|---|---|
+| `ananthanarayanan2010biocoder` | https://link.springer.com/content/pdf/10.1186/1754-1611-4-13.pdf | downloaded |
+| `bien2020recipenlg` | https://aclanthology.org/2020.inlg-1.4.pdf | downloaded |
+| `buehler1994planning` | -- | paywalled (DOI 10.1037/0022-3514.67.3.366; Unpaywall, OpenAlex and Semantic Scholar all report closed) |
+| `dagdelen2024extraction` | https://www.nature.com/articles/s41467-024-45563-x.pdf | downloaded |
+| `hamada2005cookingnavi` | -- | paywalled (DOI 10.1145/1101149.1101228; ACM DL only, no OA copy) |
+| `kahneman1979intuitive` | https://web.archive.org/web/2020/https://apps.dtic.mil/dtic/tr/fulltext/u2/a047747.pdf | downloaded (apps.dtic.mil was offline for maintenance; Internet Archive copy of the official DTIC full text) |
+| `kambhampati2024llmmodulo` | https://arxiv.org/pdf/2402.01817 | downloaded |
+| `kiddon2015mise` | https://aclanthology.org/D15-1114.pdf | downloaded |
+| `moreau2013provdm` | https://www.w3.org/TR/2013/REC-prov-dm-20130430/ | downloaded (printed from the W3C page with headless Chrome) |
+| `mori2014flowgraph` | http://www.lrec-conf.org/proceedings/lrec2014/pdf/763_Paper.pdf | downloaded (ACL Anthology entry L14-1594 links to this proceedings PDF) |
+| `pinedo2016scheduling` | -- | author's own copy, not redistributed (copyrighted textbook; never committed) |
+| `roggesolti2013remaining` | https://link.springer.com/content/pdf/10.1007%2F978-3-642-45005-1_27.pdf | downloaded |
+| `steiner2019chemputer` | https://eprints.gla.ac.uk/174440/1/174440.pdf | downloaded (University of Glasgow Enlighten) |
+| `tran2005collage` | https://link.springer.com/content/pdf/10.1007%2F11402985_2.pdf | downloaded |
+| `valmeekam2023planbench` | https://arxiv.org/pdf/2206.10498 | downloaded |
+| `vanderaalst1998petri` | https://www.vdaalst.com/publications/p53.pdf | downloaded |
+| `vanderaalst2003patterns` | http://www.workflowpatterns.com/documentation/documents/wfs-pat-2002.pdf | downloaded (authors' own workflowpatterns.com copy; the technical-report version of the DPD 2003 article) |
+| `vanderaalst2011prediction` | https://www.vdaalst.com/publications/p609.pdf | downloaded |
+| `vrana2021aquarium` | https://academic.oup.com/synbio/article-pdf/6/1/ysab006/38893518/ysab006.pdf | downloaded |
+| `white2023prompts` | https://arxiv.org/pdf/2302.11382 | downloaded |
 
 ## Summaries
 
