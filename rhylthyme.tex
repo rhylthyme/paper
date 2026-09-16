@@ -266,8 +266,8 @@ The auto-planner, available from the web editor and as a Python module, works fr
 
 \begin{figure}[t]
   \centering
-  \includegraphics[width=0.8\linewidth]{figures/view-dag-lab.png}
-  \caption{The same dependency-graph view on a laboratory program, \emph{Cell Culture Viability Assay}. Three tracks (cell culture in blue, drug treatment in magenta, viability analysis in orange) chain through an overnight incubation and a 24-hour treatment into the viability read (reagent, plate absorbance, analysis). Nothing in the view is specific to kitchens: like the schema, it is vertical-independent.}
+  \includegraphics[width=0.92\linewidth]{figures/view-dag-lab.pdf}
+  \caption{The same dependency-graph view on a laboratory program, \emph{Protein Lysate and Immunoblotting} (four tracks, sixteen steps over two days). Read left to right it follows the bench: cell preparation (blue) and treatment and lysis (magenta) on the left, gel electrophoresis (orange) at the bottom, and the immunoblotting chain of blocking, primary and secondary antibodies and washes (red) on the right. The dashed edge labelled 86400s is the \code{programStartOffset} that holds ``Add Compound Treatment'' until day~1. Nothing in the view is specific to kitchens: like the schema, it is vertical-independent. Exported from the web application's D3 view as vector graphics.}
   \label{fig:view-dag-lab}
 \end{figure}
 
