@@ -72,7 +72,61 @@ Six phases, ordered so that each leaves the paper in a consistent state. Page
 budget: the related-work condensation freed about one page; the plan spends
 it and stays at 19 to 20 pages.
 
-### Phase 1. Evaluation section (new Section 8, before Discussion)
+### Phase 1a. Model comparison runs (added 2026-09-18 at the author's request)
+
+The evaluation becomes a two-factor comparison: model tier by prompt
+structure, over the same 24 gold programs. The interesting question is the
+interaction, not the ranking: does the four-turn structure matter less as
+the model gets stronger, and which errors (dependencies, resources) survive
+at the top tier? A flat "bigger model scores higher" table is the expected
+and least useful outcome; the per-component breakdown is what earns the
+space.
+
+Design:
+
+- Models: `claude-haiku-4-5` (done, one run), `claude-sonnet-5`,
+  `claude-opus-5`, `claude-fable-5-1`. The harness is Anthropic-only
+  (`eval/llm.py`). Other vendors need a provider adapter first and are out of
+  this phase; the paper must say the comparison is within one model family.
+- Conditions: `baseline` and `four-turn`, unchanged prompts, default
+  sampling, `--max-fix-iterations 2`, the same matcher threshold (0.5).
+- Replicates: three per cell, to report a mean and a range instead of a
+  single draw. The response cache is keyed by model, pattern and prompt, so
+  each replicate needs its own `--cache-dir` or it replays the first.
+- Recorded per cell: the eight metrics already reported, fix iterations
+  (validator rejections repaired), tokens, cost and wall time, so the paper
+  can show cost against end-to-end pass rate.
+- No harness code changes are needed; a driver script under
+  `rhylthyme-cli-runner/eval/` loops models, patterns and replicates and
+  writes `eval/models/<model>/<pattern>/run<N>/results.json`.
+
+Cost, from the measured Haiku token counts (1.33 M input, 0.39 M output for
+one full run of both prompts) and the harness price table dated 2026-06-24.
+Stronger models may use fewer fix iterations or longer outputs, so treat
+these as estimates within about 30%:
+
+| Model | One run | Three runs |
+|---|---|---|
+| Haiku 4.5 | $3.30 | $9.90 |
+| Sonnet 5 | $6.59 | $19.77 |
+| Opus 5 | $16.48 | $49.44 |
+| Fable 5.1 | $32.97 | $98.91 |
+| All four | $59.34 | $178.02 |
+| Without Fable | $26.37 | $79.12 |
+
+An earlier version of this plan said "about $10 for two more models at three
+runs each". That was wrong: it priced every model at Haiku rates.
+
+Cheaper designs that keep the point: (a) one run per cell for all four
+models, about $59, no variance; (b) three runs for Haiku and Sonnet, one for
+Opus and Fable, about $79; (c) three runs without Fable, about $79. Option
+(b) gives variance where it is cheap and a single reading at the top, and is
+the recommended default.
+
+Acceptance: a results directory per cell, a summary CSV, and `--from-cache`
+re-scoring reproduces every number without spending.
+
+### Phase 1b. Evaluation section (new Section 8, before Discussion)
 
 The highest-value change, and the others lean on it.
 
@@ -81,15 +135,19 @@ The highest-value change, and the others lean on it.
   gold program fixes: steps, durations, resources, actors, relationships),
   the two conditions, the model, the matcher (how predicted steps are aligned
   to gold), the end-to-end criterion.
-- One table: the eight rows above, baseline against four-turn.
-- One small table or grouped bar figure: per-domain steps F1, relationships
-  F1 and end-to-end pass. A figure is better; it can be drawn with the
-  repository's chart conventions and exported as vector PDF.
+- One table: models as columns, the two prompts as paired sub-columns, the
+  eight metrics as rows (mean of the replicates, range in parentheses).
+- Figure A: end-to-end pass rate against cost per program, one point per
+  model and prompt, the two prompts joined by a line per model. This is the
+  figure that shows whether structure substitutes for model size.
+- Figure B: per-domain steps F1, relationships F1 and end-to-end pass for the
+  four-turn condition (the transferability evidence for suggestion #4).
+  Both figures as vector PDF.
 - Findings paragraph, stated plainly, including what did not improve:
   resource extraction is flat at 0.56 in both conditions, 9 of 24 still fail
   end to end, fitness is the weakest domain.
-- Threats to validity paragraph: gold set written by the author, one model,
-  one run per condition (no variance), sources are clean text rather than
+- Threats to validity paragraph: gold set written by the author, one model
+  family from one vendor, three replicates at most, sources are clean text rather than
   scraped pages, the benchmark measures authoring and not whether a person
   can follow the result.
 
@@ -190,24 +248,20 @@ twice.
   benchmark exists and a study does not. Naming the absence in Limitations is
   honest and sufficient for a technical report.
 - Citing production usage. It is two days of data dominated by crawlers.
-- Re-running the benchmark on more models before this revision. It is worth
-  doing (a second model and three runs per condition would give variance and
-  answer the single-model threat), but it costs money and changes numbers, so
-  it should be a deliberate step. Estimated cost at current prices: about $10
-  for two more models at three runs each.
 
 ## Decisions needed from you
 
 1. Add the cross-domain table (Phase 4), or rely on the per-domain evaluation
    figure alone?
-2. Report the existing single-run benchmark as is, or spend about $10 first
-   to add a second model and repeated runs?
+2. Decided 2026-09-18: compare models. Still open: which design in Phase 1a
+   (the recommended one costs about $79), and whether to build a provider
+   adapter so a non-Anthropic model can be included.
 3. Is the 19 to 20 page length acceptable, or should the evaluation displace
    something (the candidate is the second environment listing)?
 
 ## Order and effort
 
-Phase 1 first (it produces the numbers the abstract, contributions and MCP
+Phase 1a then 1b first (they produce the numbers the abstract, contributions and MCP
 section quote), then 3, 2, 5, 6, with 4 slotted in if approved. Roughly half
 a day of writing plus figure work; every phase can be reviewed on its own
 commit.
