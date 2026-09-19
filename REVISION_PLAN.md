@@ -126,6 +126,56 @@ the recommended default.
 Acceptance: a results directory per cell, a summary CSV, and `--from-cache`
 re-scoring reproduces every number without spending.
 
+#### Result of Phase 1a under the author's $10 ceiling (run 2026-09-18)
+
+The author capped total spending at $10. A one-program canary showed the cost
+table above was far too low for Sonnet: on the same program it wrote about 3.5
+times Haiku's output tokens, so a program costs about five times Haiku's, not
+twice, and a full 24-program Sonnet run would be about $16. The design was cut
+to a paired, domain-balanced subset with a hard stop in the driver
+(`rhylthyme-cli-runner/eval/run_model_comparison.py`, ledger in
+`eval/models/spend-ledger.json`). It stopped itself at **$5.34** after seven
+programs (event 2, fitness 2, kitchen 2, lab 1), each run through both
+prompts. With the $3.30 already spent on Haiku the total is $8.64.
+
+Like-for-like on those seven programs, one run per cell
+(`eval/models/comparison.md`, regenerate with `eval/compare_models.py`):
+
+| Metric | Haiku baseline | Haiku four-turn | Sonnet baseline | Sonnet four-turn |
+|---|---|---|---|---|
+| Steps F1 | 0.56 | 0.91 | 0.58 | 0.90 |
+| Relationships F1 | 0.30 | 0.64 | 0.27 | 0.55 |
+| Unsupported steps | 60% | 2% | 52% | 4% |
+| End-to-end pass | 2 of 7 | 3 of 7 | 3 of 7 | 4 of 7 |
+| Produced a program | 7 of 7 | 7 of 7 | 7 of 7 | 6 of 7 |
+| Cost per program | $0.05 | $0.09 | $0.26 | $0.51 |
+| Output tokens per program | 6,500 | 10,700 | 22,600 | 39,600 |
+
+What this supports, and what it does not:
+
+- The prompt structure matters more than the model tier. Going from baseline
+  to four-turn moves steps F1 by about 0.33 and relationships F1 by about 0.3
+  on both models; going from Haiku to Sonnet moves them by about nothing.
+- The larger model is not better at this task on these programs, and costs
+  five to six times as much per program. Haiku with the four-turn prompt
+  matches Sonnet with the baseline prompt on end-to-end pass at a third of
+  the cost.
+- One Sonnet four-turn run (the bread bake) spent 66,000 output tokens over
+  two repair rounds and never returned a complete program, most likely
+  because its longer answers hit the 16,000-token per-call limit before the
+  JSON closed. It is counted as a failure. Verbosity is a cost and a
+  reliability problem here, not a quality gain.
+- The two models fail on different programs (each passes one the other
+  fails), so with seven programs and one run per cell the end-to-end
+  difference (3 vs 4) is within noise. The paper must present this as a pilot:
+  n = 7, no variance estimate, one vendor, two tiers. It cannot claim Sonnet
+  is better or worse end to end.
+
+For the paper: keep the full 24-program Haiku table as the main result and
+add this as a short "model tier" paragraph with the table above, framed as a
+pilot. Figure A (pass rate against cost) still works with four points. Opus
+and Fable are out of reach at this budget; say so rather than extrapolate.
+
 ### Phase 1b. Evaluation section (new Section 8, before Discussion)
 
 The highest-value change, and the others lean on it.
@@ -253,9 +303,8 @@ twice.
 
 1. Add the cross-domain table (Phase 4), or rely on the per-domain evaluation
    figure alone?
-2. Decided 2026-09-18: compare models. Still open: which design in Phase 1a
-   (the recommended one costs about $79), and whether to build a provider
-   adapter so a non-Anthropic model can be included.
+2. Decided and done 2026-09-18: compare models within a $10 total ceiling
+   (spent $8.64 including the earlier Haiku runs). See the Phase 1a result.
 3. Is the 19 to 20 page length acceptable, or should the evaluation displace
    something (the candidate is the second environment listing)?
 
