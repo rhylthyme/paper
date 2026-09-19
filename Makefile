@@ -7,7 +7,16 @@ figures/thanksgiving-gantt.svg: figures/thanksgiving_one_oven.json ../rhylthyme-
 figures/thanksgiving-gantt.pdf: figures/thanksgiving-gantt.svg
 	rsvg-convert -f pdf -o $@ $<
 
-rhylthyme.pdf: rhylthyme.tex references.bib figures/thanksgiving-gantt.pdf
+# Evaluation table and figure, generated from eval/ so the paper cannot drift
+# from the results. Needs matplotlib (the monorepo .venv has it).
+PYTHON ?= ../.venv/bin/python
+eval-table.tex: eval/make_paper_assets.py eval/baseline.json eval/four-turn.json $(wildcard eval/models/*/*/results.json)
+	$(PYTHON) eval/make_paper_assets.py >/dev/null
+
+# The same script writes the figure.
+figures/eval-models.pdf: eval-table.tex
+
+rhylthyme.pdf: rhylthyme.tex references.bib figures/thanksgiving-gantt.pdf eval-table.tex figures/eval-models.pdf
 	pdflatex -interaction=nonstopmode rhylthyme.tex >/dev/null
 	bibtex rhylthyme >/dev/null
 	pdflatex -interaction=nonstopmode rhylthyme.tex >/dev/null

@@ -24,6 +24,7 @@ costs nothing, to produce one consolidated results.json per cell.
 from __future__ import annotations
 
 import argparse
+import re
 import json
 import subprocess
 import sys
@@ -83,6 +84,24 @@ def deepseek_balance() -> float | None:
     return None
 
 
+INFRA = re.compile(
+    r"returned HTTP (429|5\d\d)|did not answer within|Connection|timed out|Rate limit|IncompleteRead|RemoteDisconnected",
+    re.I,
+)
+
+
+def infra_error(results_file: Path) -> bool:
+    """True when a program failed because the provider did (rate limit, 5xx,
+    stall), not because of what the model wrote. Those are retried, never
+    scored: they say nothing about the model."""
+    try:
+        data = json.loads(results_file.read_text())
+        program = data.get("results", data)["programs"][0]
+    except Exception:  # noqa: BLE001
+        return True
+    return bool(program.get("error")) and bool(INFRA.search(str(program["error"])))
+
+
 def run_cli(args: list[str]) -> subprocess.CompletedProcess:
     cmd = [sys.executable, "-m", "rhylthyme_cli_runner.cli", "eval-prompts", *args]
     return subprocess.run(cmd, capture_output=True, text=True)
@@ -114,6 +133,12 @@ def main() -> None:
         default=None,
         help="Per-call output ceiling passed to eval-prompts (its default is 16000). Reasoning "
         "models count their reasoning against it: DeepSeek and Sonnet lost programs at 16000.",
+    )
+    ap.add_argument(
+        "--jobs",
+        type=int,
+        default=1,
+        help="Programs to run at the same time (each runs all its prompts).",
     )
     ap.add_argument(
         "--first-guess",
@@ -157,7 +182,20 @@ def main() -> None:
     model_dir = args.model.replace("/", "__")
     ledger = load_ledger(args.ledger)
     slugs = gold_slugs()
-    done = {(e["model"], e["pattern"], e["slug"]) for e in ledger["entries"]}
+    # A ledger entry whose program failed for infrastructure reasons is not
+    # done: the money is counted, the program is run again.
+    done = set()
+    for e in ledger["entries"]:
+        rf = (
+            args.out
+            / e["model"].replace("/", "__")
+            / e["pattern"]
+            / "per-program"
+            / e["slug"]
+            / "results.json"
+        )
+        if not infra_error(rf):
+            done.add((e["model"], e["pattern"], e["slug"]))
     print(
         f"ledger: ${spent(ledger):.2f} spent of ${args.cap:.2f} cap; {len(slugs)} gold programs"
     )
@@ -198,38 +236,14 @@ def main() -> None:
         )
 
     # Slug outer, pattern inner: every program gets all its prompts or none,
-    # so a run the cap cuts short is still a paired comparison.
-    for slug in slugs:
-        todo = [p for p in patterns if (args.model, p, slug) not in done]
-        if not todo:
-            continue
-        need = sum(reserve_for(p) for p in todo)
-        if spent(ledger) + need > args.cap:
-            print(
-                f"STOP before {slug}: ${spent(ledger):.2f} spent + ${need:.2f} reserve > ${args.cap:.2f} cap"
-            )
-            break
-        if start_balance is not None and not args.dry_run:
-            now = deepseek_balance()
-            if now is None:
-                print(f"STOP before {slug}: could not read the DeepSeek balance")
-                break
-            real = start_balance - now
-            if real + args.real_reserve > args.real_budget:
-                print(
-                    f"STOP before {slug}: ${real:.2f} really charged + ${args.real_reserve:.2f} reserve"
-                    f" > ${args.real_budget:.2f} real budget"
-                )
-                break
-            print(
-                f"  balance ${now:.2f} (really charged so far ${real:.2f})", flush=True
-            )
-        if args.dry_run:
-            for pattern in todo:
-                print(f"would run {pattern}/{slug}")
-            continue
-        # A program's prompts run side by side (they share nothing), which
-        # halves the wall time; the budget checks above cover the pair.
+    # so a run the cap cuts short is still a paired comparison. --jobs runs
+    # several programs at once; the budget check then reserves for the batch.
+    import threading
+    from concurrent.futures import ThreadPoolExecutor
+
+    lock = threading.Lock()
+
+    def run_slug(slug: str, todo: list) -> bool:
         started = time.time()
         procs = {}
         for pattern in todo:
@@ -258,15 +272,15 @@ def main() -> None:
             procs[pattern] = subprocess.Popen(
                 cmd, stdout=subprocess.PIPE, stderr=subprocess.PIPE, text=True
             )
-        failed = False
+        ok = True
         for pattern, proc in procs.items():
             _out, err = proc.communicate()
             results_file = (
                 args.out / model_dir / pattern / "per-program" / slug / "results.json"
             )
             if not results_file.exists():
-                print(f"FAILED {pattern}/{slug}: {err.strip()[-400:]}")
-                failed = True
+                print(f"FAILED {pattern}/{slug}: {err.strip()[-400:]}", flush=True)
+                ok = False
                 continue
             totals = json.loads(results_file.read_text())["meta"]["totals"]
             cost = float(totals.get("cost_usd") or 0.0)
@@ -280,51 +294,90 @@ def main() -> None:
                 "calls": totals.get("calls"),
                 "seconds": round(time.time() - started, 1),
             }
-            ledger["entries"].append(entry)
-            args.ledger.write_text(json.dumps(ledger, indent=1) + "\n")
+            if infra_error(results_file):
+                entry["infra_error"] = (
+                    True  # spent money is counted; the program is retried
+                )
+            with lock:
+                ledger["entries"].append(entry)
+                args.ledger.write_text(json.dumps(ledger, indent=1) + "\n")
+                print(
+                    f"{pattern:10} {slug:45} ${cost:.3f}  total ${spent(ledger):.2f}  ({entry['seconds']:.0f}s)",
+                    flush=True,
+                )
+        return ok
+
+    pending = [
+        (s, [p for p in patterns if (args.model, p, s) not in done]) for s in slugs
+    ]
+    pending = [(s, todo) for s, todo in pending if todo]
+    jobs = max(1, args.jobs)
+    while pending:
+        batch = []
+        need = 0.0
+        for slug, todo in pending[:jobs]:
+            cost_next = sum(reserve_for(p) for p in todo)
+            if spent(ledger) + need + cost_next > args.cap:
+                break
+            batch.append((slug, todo))
+            need += cost_next
+        if not batch:
             print(
-                f"{pattern:10} {slug:45} ${cost:.3f}  total ${spent(ledger):.2f}  ({entry['seconds']:.0f}s)",
-                flush=True,
+                f"STOP before {pending[0][0]}: ${spent(ledger):.2f} spent + reserve > ${args.cap:.2f} cap"
             )
-        if failed:
+            break
+        if start_balance is not None and not args.dry_run:
+            now = deepseek_balance()
+            real = None if now is None else start_balance - now
+            if real is None or real + args.real_reserve * len(batch) > args.real_budget:
+                print(
+                    f"STOP before {batch[0][0]}: real-budget guard (charged so far: {real})"
+                )
+                break
+            print(
+                f"  balance ${now:.2f} (really charged so far ${real:.2f})", flush=True
+            )
+        pending = pending[len(batch) :]
+        if args.dry_run:
+            for slug, todo in batch:
+                for pattern in todo:
+                    print(f"would run {pattern}/{slug}")
+            continue
+        with ThreadPoolExecutor(max_workers=len(batch)) as pool:
+            results = list(pool.map(lambda st: run_slug(*st), batch))
+        if not all(results):
             sys.exit(2)  # never loop on an error that might be costing money
 
     if args.dry_run:
         return
-    # Consolidate each cell from its cache: no model calls, no cost.
-    for pattern in [p.strip() for p in args.patterns.split(",") if p.strip()]:
+    # Consolidate each cell by merging its per-program results (no model
+    # calls). Programs that only ever failed for infrastructure reasons are
+    # left out rather than scored as model failures.
+    for pattern in patterns:
         cell = args.out / model_dir / pattern
-        ran = [
-            e["slug"]
-            for e in ledger["entries"]
-            if e["model"] == args.model and e["pattern"] == pattern
-        ]
-        if not ran:
+        programs, skipped, meta = [], [], None
+        for rf in sorted((cell / "per-program").glob("*/results.json")):
+            if infra_error(rf):
+                skipped.append(rf.parent.name)
+                continue
+            data = json.loads(rf.read_text())
+            data = data.get("results", data)
+            meta = meta or data.get("meta")
+            programs += data["programs"]
+        if not programs:
             continue
-        done_proc = run_cli(
-            [
-                "--gold",
-                str(GOLD),
-                "--model",
-                args.model,
-                "--patterns",
-                pattern,
-                "--only",
-                ",".join(ran),
-                "--from-cache",
-                "--cache-dir",
-                str(cell / "cache"),
-                "--out",
-                str(cell),
-                "--format",
-                "json",
-                *(["--max-tokens", str(args.max_tokens)] if args.max_tokens else []),
-            ]
-        )
-        ok = (cell / "results.json").exists()
-        print(
-            f"consolidated {args.model}/{pattern}: {len(ran)} programs {'ok' if ok else 'FAILED ' + done_proc.stderr.strip()[-300:]}"
-        )
+        merged = {
+            "meta": dict(
+                meta or {},
+                merged_from="per-program",
+                programs=len(programs),
+                infra_skipped=skipped,
+            ),
+            "programs": programs,
+        }
+        (cell / "results.json").write_text(json.dumps(merged, indent=1) + "\n")
+        note = f" (infra failures left out: {', '.join(skipped)})" if skipped else ""
+        print(f"consolidated {args.model}/{pattern}: {len(programs)} programs{note}")
     print(f"final: ${spent(ledger):.2f} of ${args.cap:.2f}")
 
 
