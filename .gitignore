@@ -14,3 +14,6 @@ refs/*
 # Author copy of a copyrighted textbook, never redistributed (refs/* already covers this)
 refs/pinedo2016scheduling.pdf
 !figures/*.png
+
+# arXiv staging area (rebuilt by `make arxiv`); the tarball and the sheet are kept
+arxiv/stage/
