@@ -342,6 +342,29 @@ twice.
 - Rebuild, check page count, check that Table 1 no longer floats past the
   references (a known leftover).
 
+## Nearest prior work (added 2026-09-19)
+
+Cited in a new Related Work paragraph, "Language models as authors of
+procedures"; PDFs are in `refs/` (not committed). Metadata verified against
+the ACL Anthology, Crossref and the arXiv API; claims checked in the full
+text.
+
+- `kourani2026bpm` (Software and Systems Modeling 25(4)): closest by design.
+  Text to a process model in an intermediate language, validator errors fed
+  back, 20 processes, 16 models, efficient error handling goes with quality.
+  They report latency per model and deliberately not cost.
+- `du2024paged` (ACL 2024): closest by finding. 3,394 documents; ChatGPT,
+  Flan-T5 and Llama 2; good at actors and actions, "can hardly get > 0.5 F1"
+  on gateways and flows; proposes a self-refine strategy.
+- `odonoghue2023bioplanner` (EMNLP 2023): biology protocols as pseudocode.
+- `zheng2024naturalplan` (arXiv): scheduling from prose, about a third of
+  trip plans solved, under 5% at ten cities.
+
+The evaluation section should position against the first two: the same
+step-versus-structure gap as PAGED, and a validator loop like Kourani et
+al.'s, but with timed steps, shared-resource capacities and an end-to-end
+check on makespan and critical path.
+
 ## What I recommend not doing
 
 - A user study. The reviewer offers "benchmark or user-task results"; the
