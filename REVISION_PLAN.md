@@ -176,6 +176,56 @@ add this as a short "model tier" paragraph with the table above, framed as a
 pilot. Figure A (pass rate against cost) still works with four points. Opus
 and Fable are out of reach at this budget; say so rather than extrapolate.
 
+#### Extension: DeepSeek and Gemini (run 2026-09-19)
+
+The author supplied DeepSeek and Gemini keys. The harness gained an
+OpenAI-compatible client, so both run through the same prompts, fix loop and
+scorer. Coverage is set by money, not design: `gemini-3.1-flash-lite` 20
+programs ($0.52), `deepseek-flash` 16 programs (ledger estimate $2.02 at peak
+list prices, **actually charged $0.85** off-peak with cached input), Sonnet 7,
+Haiku 24. Spending in total: Haiku $3.30 + Sonnet $5.34 + DeepSeek $0.85 +
+Gemini $0.52 = **$10.01**, one cent over the ceiling (a DeepSeek program that
+had just started when the run was stopped was still billed).
+
+Like for like on the 16 programs Haiku, DeepSeek and Gemini all ran (4 per
+domain), one run per cell (`eval/models/comparison.md`):
+
+| Metric | Haiku base | Haiku 4-turn | DeepSeek base | DeepSeek 4-turn | Gemini base | Gemini 4-turn |
+|---|---|---|---|---|---|---|
+| Steps F1 | 0.50 | 0.92 | 0.39 | 0.88 | 0.52 | 0.75 |
+| Relationships F1 | 0.25 | 0.63 | 0.14 | 0.57 | 0.27 | 0.48 |
+| Unsupported steps | 61% | 1% | 72% | 5% | 47% | 8% |
+| End-to-end pass | 2/16 | 9/16 | 3/16 | 7/16 | 2/16 | 5/16 |
+| Produced a program | 16/16 | 16/16 | 10/16 | 10/16 | 16/16 | 15/16 |
+| Cost per program (list) | $0.044 | $0.088 | $0.047 | $0.079 | $0.006 | $0.019 |
+| Output tokens per program | 6,000 | 10,100 | 36,600 | 53,300 | 2,400 | 6,600 |
+| Seconds per program (approx.) | 60 | 60 | 270 | 270 | 17 | 17 |
+
+What it supports:
+
+- The main claim holds on all four models from three vendors: the four-turn
+  structure roughly doubles steps F1 and relationships F1 and cuts
+  unsupported steps from about half to a few percent, whatever the model.
+  This is the result worth a figure.
+- Cost and quality do not line up. Gemini Flash-Lite is 5x cheaper and 15x
+  faster than Haiku and clearly weaker (steps F1 0.75 vs 0.92, 5 vs 9
+  end-to-end). DeepSeek matches Haiku's component scores when it answers, at
+  similar list cost, but is 4-5x slower.
+- **A confound that must be reported.** The harness caps each call at 16,000
+  output tokens. 63 of DeepSeek's 131 calls and 13 of Sonnet's 48 stopped at
+  that ceiling, because both spend tokens on long reasoning that counts as
+  output; Haiku and Gemini never reached it. Every "no program" failure for
+  DeepSeek (6 of 16) and Sonnet (1 of 7) is of this kind. Their end-to-end
+  numbers are therefore a lower bound under this harness setting, not a
+  measure of what the models can do. The fair rerun is `--max-tokens 64000`
+  for those two models; it was not done because the budget is spent.
+- Still a pilot: one run per cell, 7 to 24 programs per model, no variance.
+
+For the paper: lead with "structure helps every model" (a small-multiples
+figure, one panel per metric, baseline vs four-turn per model), report cost
+and latency per program as a table, and state the token-ceiling confound in
+the threats paragraph rather than ranking the reasoning models.
+
 ### Phase 1b. Evaluation section (new Section 8, before Discussion)
 
 The highest-value change, and the others lean on it.

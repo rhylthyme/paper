@@ -109,6 +109,13 @@ def main() -> None:
         help="Only the first N programs of the domain round-robin order.",
     )
     ap.add_argument(
+        "--first-guess",
+        type=float,
+        default=None,
+        help="USD to reserve for the very first program of each prompt, before any cost is measured "
+        "(default: 0.40 four-turn, 0.20 baseline, sized for a mid-tier model).",
+    )
+    ap.add_argument(
         "--real-budget",
         type=float,
         default=0.0,
@@ -156,16 +163,30 @@ def main() -> None:
             for e in ledger["entries"]
             if e["model"] == args.model and e["pattern"] == pattern
         ]
-        return 1.5 * max(seen) if seen else FIRST_GUESS.get(pattern, 0.40)
+        if seen:
+            return 1.5 * max(seen)
+        return (
+            args.first_guess
+            if args.first_guess is not None
+            else FIRST_GUESS.get(pattern, 0.40)
+        )
 
     start_balance = None
     if args.real_budget:
         if not args.model.startswith("deepseek-"):
-            sys.exit("--real-budget reads the DeepSeek balance API; it only works for deepseek-* models.")
-        start_balance = args.start_balance if args.start_balance is not None else deepseek_balance()
+            sys.exit(
+                "--real-budget reads the DeepSeek balance API; it only works for deepseek-* models."
+            )
+        start_balance = (
+            args.start_balance if args.start_balance is not None else deepseek_balance()
+        )
         if start_balance is None:
-            sys.exit("Could not read the DeepSeek balance; refusing to run without the real-budget guard.")
-        print(f"real budget: ${args.real_budget:.2f} from a starting balance of ${start_balance:.2f}")
+            sys.exit(
+                "Could not read the DeepSeek balance; refusing to run without the real-budget guard."
+            )
+        print(
+            f"real budget: ${args.real_budget:.2f} from a starting balance of ${start_balance:.2f}"
+        )
 
     # Slug outer, pattern inner: every program gets all its prompts or none,
     # so a run the cap cuts short is still a paired comparison.
@@ -191,7 +212,9 @@ def main() -> None:
                     f" > ${args.real_budget:.2f} real budget"
                 )
                 break
-            print(f"  balance ${now:.2f} (really charged so far ${real:.2f})", flush=True)
+            print(
+                f"  balance ${now:.2f} (really charged so far ${real:.2f})", flush=True
+            )
         if args.dry_run:
             for pattern in todo:
                 print(f"would run {pattern}/{slug}")
@@ -203,15 +226,34 @@ def main() -> None:
         for pattern in todo:
             cell = args.out / args.model / pattern
             cmd = [
-                sys.executable, "-m", "rhylthyme_cli_runner.cli", "eval-prompts",
-                "--gold", str(GOLD), "--model", args.model, "--patterns", pattern, "--only", slug,
-                "--out", str(cell / "per-program" / slug), "--cache-dir", str(cell / "cache"), "--format", "json",
+                sys.executable,
+                "-m",
+                "rhylthyme_cli_runner.cli",
+                "eval-prompts",
+                "--gold",
+                str(GOLD),
+                "--model",
+                args.model,
+                "--patterns",
+                pattern,
+                "--only",
+                slug,
+                "--out",
+                str(cell / "per-program" / slug),
+                "--cache-dir",
+                str(cell / "cache"),
+                "--format",
+                "json",
             ]
-            procs[pattern] = subprocess.Popen(cmd, stdout=subprocess.PIPE, stderr=subprocess.PIPE, text=True)
+            procs[pattern] = subprocess.Popen(
+                cmd, stdout=subprocess.PIPE, stderr=subprocess.PIPE, text=True
+            )
         failed = False
         for pattern, proc in procs.items():
             _out, err = proc.communicate()
-            results_file = args.out / args.model / pattern / "per-program" / slug / "results.json"
+            results_file = (
+                args.out / args.model / pattern / "per-program" / slug / "results.json"
+            )
             if not results_file.exists():
                 print(f"FAILED {pattern}/{slug}: {err.strip()[-400:]}")
                 failed = True
@@ -219,13 +261,21 @@ def main() -> None:
             totals = json.loads(results_file.read_text())["meta"]["totals"]
             cost = float(totals.get("cost_usd") or 0.0)
             entry = {
-                "model": args.model, "pattern": pattern, "slug": slug, "cost_usd": cost,
-                "input_tokens": totals.get("input_tokens"), "output_tokens": totals.get("output_tokens"),
-                "calls": totals.get("calls"), "seconds": round(time.time() - started, 1),
+                "model": args.model,
+                "pattern": pattern,
+                "slug": slug,
+                "cost_usd": cost,
+                "input_tokens": totals.get("input_tokens"),
+                "output_tokens": totals.get("output_tokens"),
+                "calls": totals.get("calls"),
+                "seconds": round(time.time() - started, 1),
             }
             ledger["entries"].append(entry)
             args.ledger.write_text(json.dumps(ledger, indent=1) + "\n")
-            print(f"{pattern:10} {slug:45} ${cost:.3f}  total ${spent(ledger):.2f}  ({entry['seconds']:.0f}s)", flush=True)
+            print(
+                f"{pattern:10} {slug:45} ${cost:.3f}  total ${spent(ledger):.2f}  ({entry['seconds']:.0f}s)",
+                flush=True,
+            )
         if failed:
             sys.exit(2)  # never loop on an error that might be costing money
 
