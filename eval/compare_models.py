@@ -166,7 +166,7 @@ def main() -> None:
         + ".",
         "",
     ]
-    rows = []
+    rows: list = []
     seen_sets = []
     for size in sorted({len(v) for v in coverage.values()}):
         chosen = [m for m in models if len(coverage[m]) >= size]

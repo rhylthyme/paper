@@ -291,7 +291,7 @@ def main() -> None:
         ]
         if not ran:
             continue
-        proc = run_cli(
+        done_proc = run_cli(
             [
                 "--gold",
                 str(GOLD),
@@ -312,7 +312,7 @@ def main() -> None:
         )
         ok = (cell / "results.json").exists()
         print(
-            f"consolidated {args.model}/{pattern}: {len(ran)} programs {'ok' if ok else 'FAILED ' + proc.stderr.strip()[-300:]}"
+            f"consolidated {args.model}/{pattern}: {len(ran)} programs {'ok' if ok else 'FAILED ' + done_proc.stderr.strip()[-300:]}"
         )
     print(f"final: ${spent(ledger):.2f} of ${args.cap:.2f}")
 
