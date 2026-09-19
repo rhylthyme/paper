@@ -2,7 +2,7 @@
 all: rhylthyme.pdf
 
 figures/thanksgiving-gantt.svg: figures/thanksgiving_one_oven.json ../rhylthyme-server/static/js/timeline-render.js
-	node -e "const R=require('../rhylthyme-server/static/js/timeline-render.js');const fs=require('fs');fs.writeFileSync('$@',R.renderTimelineSvg(JSON.parse(fs.readFileSync('$<'))))"
+	node -e "const R=require('../rhylthyme-server/static/js/timeline-render.js');const fs=require('fs');fs.writeFileSync('$@',R.renderTimelineSvg(JSON.parse(fs.readFileSync('$<')),{style:'publication',fontScale:1.1}))"
 
 figures/thanksgiving-gantt.pdf: figures/thanksgiving-gantt.svg
 	rsvg-convert -f pdf -o $@ $<
