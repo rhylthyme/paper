@@ -33,30 +33,36 @@ Scheduling software falls into three kinds: tools that compute a plan and hand i
 
 21 pages, 6 figures, 2 tables, 3 listings. Code, gold set, evaluation harness and results: https://github.com/rhylthyme
 
-**Primary category: cs.AI (Artificial Intelligence)**
+**Primary category: cs.SE (Software Engineering)** (submitted 2026-09-19)
 
-arXiv defines cs.AI to include planning, and scheduling under resource
-constraints is the paper's subject: the related work is CPM/PERT, RCPSP,
-temporal constraint networks and robot task allocation, and the evaluation
-is of language-model agents authoring plans against a validator (the
-LLM-Modulo arrangement the paper cites). That is where readers of this work
-look.
+The contribution is a software system: a declarative language with a schema,
+two validators, a runtime and an MCP server, positioned against workflow
+engines and process notations, with an evaluation of tool-mediated authoring.
+That is cs.SE's territory. It is also where the author already has standing:
+arXiv endorses per domain, the author's sole-author paper 1303.2646 is in
+cs.SE and 2006.08589 is in cs.DL, so no new endorsement was needed.
 
-**Cross-lists: cs.HC and cs.SE**
+cs.AI was the first choice on subject grounds (arXiv places planning and
+scheduling there, and the evaluation is of language-model agents authoring
+plans against a validator). It was set aside as primary only because it
+prompted an endorsement request; it is the most valuable cross-list.
 
+**Cross-lists: cs.AI and cs.HC**
+
+- cs.AI (Artificial Intelligence): planning and scheduling under resource
+  constraints; LLM agents with external verifiers. If arXiv asks for an
+  endorsement on this cross-list, submit without it and add it after the
+  paper is announced, once an endorser is found (a cross-list can be added
+  to an announced paper from the user page).
 - cs.HC (Human-Computer Interaction): the executor is a person. The timeline,
   itinerary and dependency-graph views, manual gates and the mixed-initiative
-  framing are HCI content, and the kitchen and lab prior work the paper builds
-  on is HCI work.
-- cs.SE (Software Engineering): a declarative language with a schema, two
-  validators, a runtime and an MCP server is a software-systems contribution,
-  and the workflow-engine comparison is cs.SE territory.
+  framing are HCI content.
 
 Considered and left out, because arXiv moderators remove marginal
-cross-lists and more than two invites it: cs.CL (the evaluation extracts
-structure from text, but no language-modelling contribution is claimed),
-cs.PL (the language is a JSON schema, not a programming-language result),
-cs.RO (compared against, not contributed to).
+cross-lists: cs.CL (the evaluation extracts structure from text, but no
+language-modelling contribution is claimed), cs.PL (the language is a JSON
+schema, not a programming-language result), cs.RO (compared against, not
+contributed to).
 
 **ACM classification** (optional field)
 
@@ -79,12 +85,15 @@ accept for a later version of record.
 
 ## Before you press submit
 
-1. **Endorsement.** cs.AI requires an endorsement for a first submission to
-   the archive from an account without one. If arXiv asks, it gives you a
-   code to send to an endorser: anyone who has submitted a few cs.AI (or
-   cs.LG, cs.CL) papers in the last five years can endorse. cs.SE and cs.HC
-   have the same rule, so switching primary does not avoid it. This is the
-   one step that can take days; start it first.
+1. **Endorsement.** Not needed for cs.SE (see above). Only the cs.AI
+   cross-list may ask for one. Candidates checked on 2026-09-19 against the
+   public arXiv record: Andrew Lumsdaine (3 cs papers in the window, the
+   strongest), Alan Cleary (2, arXiv:2407.08826 and 2407.08190; co-author
+   Shunsuke Inenaga is a likelier endorser). Rob Patro has one cs paper in
+   the window, and Stavros Papadopoulos's only arXiv paper is from 2015 (the
+   2025 one under that name is a namesake), so neither is likely to qualify.
+   Confirm anyone with the logged-in "Which authors of this paper are
+   endorsers?" link before emailing, and ask one person at a time.
 2. **Check arXiv's own compile.** After upload, open the PDF arXiv produces
    and compare it with `arxiv/rhylthyme-arxiv-preview.pdf`: page count 21,
    Table 1 on page 5, Table 2 and Figure 6 in Section 8, no "??".
